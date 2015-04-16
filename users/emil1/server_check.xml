@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<file_status> 
+	<file_number>1</file_number>	
+	<file>
+	<file_index>1</file_index>
+	<file_name>tester.mov</file_name>
+	<file_hash>266ee07a8abff3c074c496ca69667fb9</file_hash>
+	</file>
+ 
+	<file_number>2</file_number>	
+	<file>
+	<file_index>2</file_index>
+	<file_name>Instagram-Time.mp4</file_name>
+	<file_hash>8d0330e84bbc7e151f299c03f8e7a8a1</file_hash>
+	</file>
+ 
+	<file_number>3</file_number>	
+	<file>
+	<file_index>3</file_index>
+	<file_name>3d power point test 3.mp4</file_name>
+	<file_hash>745fcbd294bb893b10259bb0486aa840</file_hash>
+	</file>
+</file_status>
