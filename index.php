@@ -33,7 +33,7 @@ $userL = htmlentities($_SESSION['username']);
 					'uploader' : 'uploadify.php',
 					'onUploadSuccess' : function(file, data, response) { 
 					setTimeout(function(){
-					window.location.reload(1);
+					window.location.href = 'index.php?run=y';
 					}, 1500); 
 					}
 			});
@@ -50,6 +50,10 @@ $userL = htmlentities($_SESSION['username']);
 <link rel="stylesheet" href="css/ion.rangeSlider.css" />
 <link rel="stylesheet" href="css/ion.rangeSlider.skinFlat.css" />
 
+<!-- Add fancyBox main JS and CSS files -->
+<script type="text/javascript" src="fancybox/jquery.fancybox.js?v=2.1.5"></script>
+<link rel="stylesheet" type="text/css" href="fancybox/jquery.fancybox.css?v=2.1.5" media="screen" />
+
 <style type="text/css">
 body {
 	font: 13px Arial, Helvetica, Sans-serif;
@@ -61,7 +65,7 @@ body {
 if (login_check($mysqli) == false) { echo '<meta http-equiv="refresh" content="0; url=login.php">'; }
 ?> 
     <div class="topbar">
-        <div style="float: left; margin-left: 100px;"><img width="400" src="assets/img/logo.png"></div>
+        <div style=" position:absolute; float: left; margin-left: 100px; margin-top: -3px;"><img width="280" src="assets/img/logo.png"></div>
         <div style="float: right; text-align:right;">Logged in as: <?php echo $userL; ?><br><a href="includes/logout.php">log out</a></div>
     </div>
 <div style="clear:both;"></div>

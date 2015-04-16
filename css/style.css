@@ -151,26 +151,63 @@ input[type=password]{
 			background-color: #c1cfd9;
 			position: relative; /*To make absolute position in .scroll (Check "Recent Posts" and "Categories")*/
 		}
-.btn {
-	display: inline-block;
-	line-height: 35px;
-	font-size: 15px;
-	font-family: sans-serif;
-	font-weight: bold;
-	text-transform: uppercase;
-	background: #f97e76;
-	color: #ffffff;
-	text-align: center;
-	-webkit-transition: background .5s ease-out;
-	-moz-transition: background .5s ease-out;
-	-o-transition: background .5s ease-out;
-	-ms-transition: background .5s ease-out;
-	transition: background .5s ease-out;
-}
-	.btn:hover {
-		text-decoration: none;
-		background: #F75145;
-	}
+		.btn {
+		  background: #ff8282;
+		  background-image: -webkit-linear-gradient(top, #ff8282, #ff8282);
+		  background-image: -moz-linear-gradient(top, #ff8282, #ff8282);
+		  background-image: -ms-linear-gradient(top, #ff8282, #ff8282);
+		  background-image: -o-linear-gradient(top, #ff8282, #ff8282);
+		  background-image: linear-gradient(to bottom, #ff8282, #ff8282);
+		  -webkit-border-radius: 28;
+		  -moz-border-radius: 28;
+		  border-radius: 28px;
+		  font-family: Arial;
+		  color: #ffffff;
+		  font-size: 20px !important; 
+		  padding: 5px 20px 5px 20px !important;
+		  text-decoration: none;
+		  border: 0px;
+		  cursor: pointer;
+		}
+
+		.btn:hover {
+		  background: #e34949;
+		  background-image: -webkit-linear-gradient(top, #e34949, #e34949);
+		  background-image: -moz-linear-gradient(top, #e34949, #e34949);
+		  background-image: -ms-linear-gradient(top, #e34949, #e34949);
+		  background-image: -o-linear-gradient(top, #e34949, #e34949);
+		  background-image: linear-gradient(to bottom, #e34949, #e34949);
+		  text-decoration: none;
+		}
+		
+		.btn_green {
+		  background: #69ff8c;
+		  background-image: -webkit-linear-gradient(top, #69ff8c, #69ff8c);
+		  background-image: -moz-linear-gradient(top, #69ff8c, #69ff8c);
+		  background-image: -ms-linear-gradient(top, #69ff8c, #69ff8c);
+		  background-image: -o-linear-gradient(top, #69ff8c, #69ff8c);
+		  background-image: linear-gradient(to bottom, #69ff8c, #69ff8c);
+		  -webkit-border-radius: 28;
+		  -moz-border-radius: 28;
+		  border-radius: 28px;
+		  font-family: Arial;
+		  color: #ffffff;
+		  font-size: 20px !important; 
+		  padding: 5px 20px 5px 20px !important;
+		  text-decoration: none;
+		  border: 0px;
+		  cursor: pointer;
+		}
+
+		.btn_green:hover {
+		  background: #1cff51;
+		  background-image: -webkit-linear-gradient(top, #1cff51, #1cff51);
+		  background-image: -moz-linear-gradient(top, #1cff51, #1cff51);
+		  background-image: -ms-linear-gradient(top, #1cff51, #1cff51);
+		  background-image: -o-linear-gradient(top, #1cff51, #1cff51);
+		  background-image: linear-gradient(to bottom, #1cff51, #1cff51);
+		  text-decoration: none;
+		}
 .lupa {
 	font-size: 20px;
 	color: #c1cfd9;
@@ -248,10 +285,10 @@ input[type=password]{
 					color: black;
 					margin: 0 0 20px 0;
 				}
-				.newPostContent .btn {
+				/*.newPostContent .btn {
 					width: 170px;
 					line-height: 45px;
-				}
+				}*/
 					.disabled {
 						background: #c1cfd9;
 					}
@@ -336,10 +373,10 @@ input[type=password]{
 				width: 300px;
 				height: 35px;
 			}
-			#tags .btn {
+			/*#tags .btn {
 				width: 80px;
 				margin: 20px 0 0 5px;
-			}
+			}*/
 			#tags p {
 				font-size: 11px;
 				margin-top: 8px;
@@ -487,9 +524,9 @@ input[type=password]{
 				display: inline-block;
 				margin: 10px 10px 0 20px;
 			}
-			#categories .btn {
+			/*#categories .btn {
 				width: 80px;				
-			}
+			}*/
 				.save {
 					float: left;
 					margin: 15px 0 0 20px;

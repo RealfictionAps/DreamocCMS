@@ -18,7 +18,7 @@ if (login_check($mysqli) == true) : ?>
 <div style="clear:both;"></div>
 
       <div style="float:left;">
-      <h3>Video list</h3>
+      <h3>Content uploads:</h3>
       </div>
 <div style="clear:both;"></div>
 <table width="0" border="0" cellspacing="0" cellpadding="0">
@@ -31,7 +31,7 @@ $dirhandle = opendir($dirname); //Åben mappen
 $i = 1;
 while($file = readdir($dirhandle)) //Loop gennem mappen
 {
-    if ($file != "." && $file != ".." && $file != "server_check.xml" && $file != "server_control_dreamoc_config.xml" && $file != ".DS_Store") //Fjern . og ..
+    if ($file != "." && $file != ".." && $file != "server_check.xml" && $file != "server_control_dreamoc_config.xml" && $file != ".DS_Store" && $file != "description.txt") //Fjern . og ..
     {
         if (is_file($dirname.$file)) //Find ud af om det er en fil eller en mappe
         {
@@ -40,22 +40,37 @@ while($file = readdir($dirhandle)) //Loop gennem mappen
 			$fileMD5 = $path."/$dir/$userL/$file";  // any file
 			$hash = md5_file($fileMD5);
 			// SHort name
-			$ShortFileName = substr($file, 0, 30);
-			if(strlen($file) > 30) { $end = "(...)"; }
+			$ShortFileName = substr($file, 0, 40);
+			if(strlen($file) > 30) { $end = "(...)"; } else { $end = ""; }
 			$count = $i++;
-			echo "<div style='margin: 10px 10px 10px 0px; padding-bottom: 80px;'>
-					
-					<div style='float:left;'>
-						<video width='150'>
-							<source src='$dirname$file' type='video/mp4'>
-							Your browser does not support the video tag.
-						</video>
-					</div>
-					<div style='float:left; padding-left: 10px; padding-top: 10%;'>Fil #$count:<br>$ShortFileName $end</div>
-	
-					<div style='float:right; margin-top: 10px; margin-right: 15px;'><a href='index.php?del=$file' style='color:red'>Delete</a></div>";
+			$ext = pathinfo($file, PATHINFO_EXTENSION);
+			?>
+            <div style=' background-color:#FFFDA1; margin: 10px 10px 10px 0px; padding-bottom: 80px;'>
+			  <div style='float:left; padding-left:10px; margin-top:10px;'><span style='font-size: 20px; text-decoration:none;'>
+            	<a class="video-<?php echo $count; ?>" data-fancybox-type="iframe" href="video.php?video=<?php echo "$dirname$file&ext=$ext"; ?>"><? echo "$ShortFileName $end"; ?></a></span><br>Fil #<?php echo "$count"; ?>
+              </div>
+			<div style='float:right; margin-top: 13px; margin-right: 15px;'>
+            	<a href='index.php?del=$file' title='Delete this' class='btn'>X</a>
+              </div>
+			</div>
+            <script type="text/javascript">
+
+			$(document).ready(function() {
+			$(".video-<? echo $count; ?>").fancybox({
+				maxWidth	: 700,
+				maxHeight	: 500,
+				fitToView	: false,
+				width		: '70%',
+				height		: '70%',
+				autoSize	: false,
+				closeClick	: false,
+				openEffect	: 'none',
+				closeEffect	: 'none'
+			});
+		});
+					</script>
+			<?php 
 			//echo "<br>Hash: $hash";
-			echo "</div><br>";
 			
 if(isset($_GET['run'])) {
 
@@ -107,17 +122,46 @@ fclose($fil); //Luk filen
 ?>
       </td>
       <td width="213" valign="top">
-<div align="center" style="margin-top: 10px;"> <a href="index.php" class="btn disabled">Update files list</a></div>
-<div align="center" style="padding-top: 20px">
-<a href="index.php?run=y" class="btn">Update Dreamoc</a>
+<div style="padding-top: 10px; margin-left: 10px;">
+<form method="post" action="#">
+<label><div style="font-size: 20px;">Description:</div></label>
+<input style="font-size: 16px;" name="desc" type="text" value="<?php $descIn = file_get_contents("$dir/$userL/description.txt"); echo strip_tags($descIn); ?>">
+<br><br>
+<input class="btn_green" type="submit" value="Update">
+</form>
+<br>
+<a class="btn" id="help" data-fancybox-type="iframe" href="help.php">HELP ME</a>
 
-        <?php
-if(isset($_GET['run'])) { echo "<div style='color:green; padding-top: 10px; font-weight: bold;'>-- DONE --</div>"; }
+<script type="text/javascript">
+		$(document).ready(function() {
+		$("#help").fancybox({
+			maxWidth	: 700,
+			maxHeight	: 500,
+			fitToView	: false,
+			width		: '70%',
+			height		: '70%',
+			autoSize	: false,
+			closeClick	: false,
+			openEffect	: 'none',
+			closeEffect	: 'none'
+		});
+	});
+</script>
+<?php
+if(isset($_POST['desc'])) {
+	$desc = $_POST['desc'];
+	$fil = fopen("$dir/$userL/description.txt", "w"); //Åben tekstfilen 
+	fwrite($fil, "$desc");
+	fclose($fil); //Luk filen
+	echo '<meta http-equiv="refresh" content="0; url=index.php">';
+}
+
+if(isset($_GET['run'])) { echo "<div style='color:green; padding-top: -10px; font-weight: bold;'>Your Dreamocs are updated</div>"; }
 
 if(isset($_GET['del'])) {
 	$fileDel = $_GET['del'];
 	unlink("$dir/$userL/$fileDel");
-	echo '<meta http-equiv="refresh" content="0; url=index.php">';
+	echo '<meta http-equiv="refresh" content="0; url=index.php?run=y">';
 }
 ?>
 </div>

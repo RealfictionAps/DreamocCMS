@@ -8,6 +8,7 @@ if (login_check($mysqli) == true) :
 $userL = htmlentities($_SESSION['username']);
 include_once 'includes/psl-config.php';
 
+// #### Connect to MySql
 mysql_connect(HOST, USER, PASSWORD) or die(mysql_error());
 mysql_select_db(DATABASE) or die(mysql_error());
 
@@ -61,7 +62,7 @@ if(isset($_POST['submit'])){
 	 if($_POST['protocol_type']!=''){
 	   $protocol_type = 'ftp';
 	 }else{
-	   $auto_time_value='ftp';
+	   $$protocol_type = 'ftp';
 	 }
 	 
 	 if($_POST['protocol_url']!=''){
@@ -81,9 +82,9 @@ if(isset($_POST['submit'])){
 	   $protocol_id = strtolower($userL);
 	 } 
 	 if($_POST['protocol_pw']!=''){
-	   $protocol_pw =$serverPass;
+	   $protocol_pw = $serverPass;
 	 }else{
-	   $protocol_pw=$serverPass;
+	   $protocol_pw = $serverPass;
 	 }
 	
 	if($_POST['protocol_path']!=''){

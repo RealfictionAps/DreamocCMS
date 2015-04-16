@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <server_setting>
 	<reset_setting>
-		<reset_control>disable</reset_control>
+		<reset_control>enable</reset_control>
 	</reset_setting>
 	<spotlight_setting>
 		<spotlight_options>manual</spotlight_options>
-		<manual_step>67</manual_step>
+		<manual_step>75</manual_step>
 	</spotlight_setting>
 	<volume_setting>
-		<volume_value>70</volume_value>
+		<volume_value>48</volume_value>
 	</volume_setting>
 </server_setting>

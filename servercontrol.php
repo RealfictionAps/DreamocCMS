@@ -47,27 +47,34 @@ $volume_value = $xml->volume_setting[0]->volume_value;
 
 ?>
 
-<form id="1" name="1" method="post" action="servercontrol.php">
+<form id="soundLight" name="soundLight" method="post" action="servercontrol.php">
 <div class="wrap">
+<!-- how to hide: http://jsfiddle.net/sowdri/8vbyD/5/ -->
+
               Enable<br><br>
-              <input type="checkbox" class="slider-v3" id="flipSC" name="flipSC" <?php echo $resetControl; ?> />
+              <input type="checkbox" class="slider-v3" id="flipSC" name="flipSC" onClick='toggle()' <?php echo $resetControl; ?> />
               <label for="flipSC"></label>
+              <div style=" margin-left: 165px; margin-top: -27px; position:absolute; color:#9E9E9E;">Off</div>
+              <div style=" margin-left: 315px; margin-top: -27px; position:absolute; color:#9E9E9E;">On</div>
 <br><br>
         <label>Sound volume</label>
         <input type="text" id="range" value="<?php echo $volume_value; ?>" name="sliderSound" />
-<br><br>
-              Spotlight options:<br><br>
+<br><br><br><br>
+              Light control:<br><br>
               <input type="checkbox" class="slider-v3" id="flipSO" name="flipSO" <?php echo $spotlightOptions; ?> />
               <label for="flipSO"></label>
-<br><br>
-        <label>Spotlight level</label>
+              <div style=" margin-left: 140px; margin-top: -27px; position:absolute; color:#9E9E9E;">Manual</div>
+              <div style=" margin-left: 315px; margin-top: -27px; position:absolute; color:#9E9E9E;">Auto</div>
+<br><br><br>
+        <label>Manual light level</label>
         <input type="text" id="range2" value="<?php echo $manual_step; ?>" name="sliderLight" />
+        
 </div>
 <div style="padding-bottom: 50px;">
 <script src="js/ion.rangeSlider.js"></script>
-<script>
 
-    $(function () {
+<script type="text/javascript">  
+	$(function () {
 
         $("#range").ionRangeSlider({
             hide_min_max: true,
@@ -79,11 +86,14 @@ $volume_value = $xml->volume_setting[0]->volume_value;
             type: 'single',
             step: 1,
             prefix: "",
+			//disable: true,
             grid: true
         });
 
     });
-</script>
+
+</script>  
+
 <script>
 
     $(function () {
