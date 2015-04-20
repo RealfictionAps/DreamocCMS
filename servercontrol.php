@@ -73,9 +73,12 @@ $volume_value = $xml->volume_setting[0]->volume_value;
 <div style="padding-bottom: 50px;">
 <script src="js/ion.rangeSlider.js"></script>
 
-<script type="text/javascript">  
-	$(function () {
+<script type="text/javascript">	
 
+        if (!document.getElementById('flipSC').checked) {
+            
+			
+		$(function () {
         $("#range").ionRangeSlider({
             hide_min_max: true,
             keyboard: true,
@@ -86,18 +89,44 @@ $volume_value = $xml->volume_setting[0]->volume_value;
             type: 'single',
             step: 1,
             prefix: "",
-			//disable: true,
+			disable: true,
             grid: true
         });
 
     });
+			
+			
+        } if (document.getElementById('flipSC').checked) {
+          
+		  
+		$(function () {
+        $("#range").ionRangeSlider({
+            hide_min_max: true,
+            keyboard: true,
+            min: 0,
+            max: 100,
+            from: 0,
+            to: 100,
+            type: 'single',
+            step: 1,
+            prefix: "",
+			disable: false,
+            grid: true
+        });
+
+    });
+		  
+		  
+        }
 
 </script>  
 
-<script>
+<script type="text/javascript">	
 
-    $(function () {
-
+        if (!document.getElementById('flipSC').checked) {
+            
+			
+		$(function () {
         $("#range2").ionRangeSlider({
             hide_min_max: true,
             keyboard: true,
@@ -108,11 +137,37 @@ $volume_value = $xml->volume_setting[0]->volume_value;
             type: 'single',
             step: 1,
             prefix: "",
+			disable: true,
             grid: true
         });
 
     });
-</script>
+			
+			
+        } if (document.getElementById('flipSC').checked) {
+          
+		  
+		$(function () {
+        $("#range2").ionRangeSlider({
+            hide_min_max: true,
+            keyboard: true,
+            min: 0,
+            max: 100,
+            from: 0,
+            to: 100,
+            type: 'single',
+            step: 1,
+            prefix: "",
+			disable: false,
+            grid: true
+        });
+
+    });
+		  
+		  
+        }
+
+</script> 
 </div>
 
         <input name="conf" type="submit" class="btn" value="Update">

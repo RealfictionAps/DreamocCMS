@@ -4,5 +4,4 @@
 	<?php
 	include('hd3-configurator/index.php');
 	?>
-	
 </div>

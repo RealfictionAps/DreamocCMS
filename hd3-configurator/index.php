@@ -77,22 +77,20 @@
 	
 	
 	<div class="block" style="width:300px;margin-bottom:70px">
-		<input class="btn" style="float:right;" value="Export to SD Card" type="submit" onclick="return submit_form()" name="submit" id="Send">
+		<input class="btn" style="float:right;" value="Compose for SD Card" type="submit" name="submit" id="Send">
 	</div>
 </form>
+
+<?php if(isset($_GET['mode'])) { ?>
 <script>
-function submit_form() {
-    
-	$.fancybox.open({
+	$.fancybox({
     padding : 0,
 	scrolling : 'no',
-    href: 'video.php',
+    href: 'hd3-configurator/infodownload.php',	
     type: 'iframe'
 });
-
-}
 </script>
-
+<?php } ?>
 
 
 

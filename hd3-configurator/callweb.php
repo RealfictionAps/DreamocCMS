@@ -200,8 +200,9 @@ file_put_contents('config.xml',$output);
 //header('location:index.php?mode=export');
  header('Content-Type: application/xml;');
  header('Content-Disposition: attachment; filename=config.xml;');
- readfile('config.xml');
+ 
+// readfile('config.xml');
+header('location:../?p=hd3conf&mode=export');
 
-} 
-?>
+}  ?>
 <?php endif; ?>

@@ -6,7 +6,7 @@ sec_session_start();
 
 if (login_check($mysqli) == true) : ?>
 <div align="center" style="width: 680px;">
-	<h1>Upload files to your dreamoc</h1>
+	<div style="margin-right: 220px;"><h1>Upload files to your dreamoc</h1></div>
 <br><br>
         <form style="float:left; margin-left: 60px; width: 300px;">
           <div id="queue"></div>
