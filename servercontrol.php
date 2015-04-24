@@ -48,7 +48,7 @@ $volume_value = $xml->volume_setting[0]->volume_value;
 ?>
 <script type="text/javascript">
 $(document).ready(function(){
-    var form = $('#soundLight'),
+    var form = $('#soundLightX'),
         original = form.serialize()
 
     form.submit(function(){
@@ -61,12 +61,12 @@ $(document).ready(function(){
     }
 })
 </script>
-<form id="soundLight" name="soundLight" method="post" action="servercontrol.php">
+<form id="soundLight" name="soundLight" method="post" action="index.php?p=servercontrol">
 <div class="wrap">
 <!-- how to hide: http://jsfiddle.net/sowdri/8vbyD/5/ -->
 
               Enable<br><br>
-              <input type="checkbox" class="slider-v3" id="flipSC" name="flipSC" onClick='toggle()' <?php echo $resetControl; ?> />
+              <input type="checkbox" class="slider-v3" id="flipSC" name="flipSC" onChange="toggle()" <?php echo $resetControl; ?> />
               <label for="flipSC"></label>
               <div style=" margin-left: 165px; margin-top: -27px; position:absolute; color:#9E9E9E;">Off</div>
               <div style=" margin-left: 315px; margin-top: -27px; position:absolute; color:#9E9E9E;">On</div>

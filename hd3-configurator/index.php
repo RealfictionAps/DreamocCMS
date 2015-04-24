@@ -45,7 +45,7 @@
       <option value="+11:00">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option>
       <option value="+12:00">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
 </select>
-		 <span title='ntp_timezone : timezone value, the range is from 00:00 to 13:00 (hh:mm)' class="masterTooltip">?</span>
+		 <span title='Choose the timezone of where your Dreamoc is placed physically.' class="masterTooltip">?</span>
 	</div>
 
    <div style="font-size: 18px; margin-left: -10px; margin-bottom: 10px; margin-top: 40px; color:#606060;">2: Timer setting</div>
@@ -53,7 +53,7 @@
 		<label>Update content on power up:</label>
 		<input name="auto_boot" size="30" type="radio"  checked="checked" value="on" ><span>ON</span>
 		<input name="auto_boot" size="30" type="radio" value="off"  id="dhcp_set"><span>OFF</span>
-		<span title='auto_boot_options : 1."on" when system boot, it will start to download 2."off" when system boot, it will not start to download ' class="masterTooltip">?</span>
+		<span title='Auto Boot lets you decide if the content should be updated when you turn on your Dreamoc (ON), or if it should only update content on a specific time (OFF).' class="masterTooltip">?</span>
 	</div>
 
 <br>
@@ -68,7 +68,7 @@
 		<input type="hidden" name="auto_time" value="on">
         <label>Daily content update time:</label>
 		<input name="auto_time_value" class="" id="auto_time_value1" size="30" value="12:30:00" type="text"> 
-		<span title='auto_time_value : For schedule download time setting, the time range is from 00:00:00 to 23:59:59(hh:mm:ss)' class="masterTooltip">?</span>
+		<span title='The one time a day, where your dreamoc seeks if there should be new content on the server - and then download it. Range can be set from 00:00:00 to 23:59:59 (hh:mm:ss).' class="masterTooltip">?</span>
 	</div>	
 	
 	
@@ -83,20 +83,20 @@
 	<div class="block">
 		<label>Daily Dreamoc power schedule:</label>
 		<input name="autopower_options" id="autopower_options1" size="30"  type="radio"  value="on" ><span>ON</span>
-		<input name="autopower_options" size="30" id="autopower_options2" checked ="checked" type="radio" value="off"  id="dhcp_set"><span>OFF</span>
-		 <span title='autopower_options : 1. "on" System will be auto power on/off when power on/off time is up 2. "off" Disable the feature' class="masterTooltip">?  </span>
+		<input name="autopower_options" size="30" id="autopower_options2" checked ="checked" type="radio" value="off" id="dhcp_set"><span>OFF</span>
+		 <span title="Should be switched to ON if you want your Dreamoc to automatically power on and off at a specific time a day. It it's OFF, the feature is disabled." class="masterTooltip">?  </span>
 	
 	</div>
 	
 	<div class="block">
 		<label>Dreamoc power on time:</label>
 		<input name="poweron_time" id="poweron_time" size="30" value="07:30:00" type="text"> 
-		<span title='poweron_time : The time range is from 00:00:00 to 23:59:59 (hh:mm:ss)' class="masterTooltip">?</span>
+		<span title='The specific time a day, where the Dreamoc should power ON. Range can be set from 00:00:00 to 23:59:59 (hh:mm:ss).' class="masterTooltip">?</span>
 	</div>	
 	<div class="block">
 		<label>Dreamoc power off time:</label>
 		<input name="poweroff_time" id="poweroff_time" size="30" value="20:00:00" type="text"> 
-		<span title='poweroff_time : The time range is from 00:00:00 to 23:59:59 (hh:mm:ss)' class="masterTooltip">?</span>
+		<span title='The specific time a day, where the Dreamoc should power OFF. Range can be set from 00:00:00 to 23:59:59 (hh:mm:ss).' class="masterTooltip">?</span>
 	</div>
 	
 	

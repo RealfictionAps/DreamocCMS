@@ -172,7 +172,7 @@ if(isset($_POST['desc'])) {
 	echo '<meta http-equiv="refresh" content="0; url=index.php">';
 }
 
-if(isset($_GET['run'])) { echo "<div style='color:green; padding-top: -10px; font-weight: bold;'>Your Dreamocs are updated</div>"; }
+if(isset($_GET['run'])) { echo "<div style='color:green; padding-top: 15px; font-weight: bold;'>Your Dreamocs are updated</div>"; }
 
 if(isset($_GET['del'])) {
 	$fileDel = $_GET['del'];
