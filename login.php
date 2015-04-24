@@ -43,6 +43,17 @@ if (login_check($mysqli) == true) {
                     <div class="bar title-bar">
                         <h2>Login</h2>
                     </div>
+<?php
+// Include and instantiate the class.
+require_once 'Mobile_Detect.php';
+$detect = new Mobile_Detect;
+ 
+// Any mobile device (phones or tablets).
+if ( $detect->isMobile() ) {
+echo '<div align="center" style="font-size: 60px; margin-top: 0px;">Du skal bruge din computer, hvis du vil tage testen</div>';
+}
+else {
+?>
 <div style="margin: 20px 20px 20px 20px;">
           <form action="includes/process_login.php" method="post" name="login_form">
           <table width="0" height="100" border="0" cellspacing="0" cellpadding="0">
@@ -74,5 +85,6 @@ if (login_check($mysqli) == true) {
     </tr>
   </tbody>
 </table>
+<?php } ?>
     </body>
 </html>

@@ -104,16 +104,18 @@ if(isset($_POST['submit'])){
 	   $ntp_ip='204.152.184.72';
 	 } 
 	 
-	 if($_POST['ntp_timezone_adjust']!=''){
-	   $ntp_timezone_adjust =$_POST['ntp_timezone_adjust'];
-	 }else{
-	   $ntp_timezone_adjust='+';
+	 $tz = $_POST['ntp_timezone'];
+	 $tz10 = substr($tz, 0, 1);
+	 if ($_POST['ntp_timezone']) {
+	   $ntp_timezone_adjust = $tz10;
+	 } else {
+	   $ntp_timezone_adjust = '+';
 	 } 
 	 
 	 if($_POST['ntp_timezone']!=''){
-	   $ntp_timezone =$_POST['ntp_timezone'];
+	   $ntp_timezone = substr($tz, 1, 5);
 	 }else{
-	   $ntp_timezone='02:00';
+	   $ntp_timezone='xx:00';
 	 }
 	if($_POST['autopower_options']!=''){
 	   $autopower_options =$_POST['autopower_options'];
