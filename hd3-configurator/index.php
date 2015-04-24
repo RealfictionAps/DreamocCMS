@@ -100,10 +100,27 @@
 	</div>
 	
 	
-	<div class="block" style="width:300px;margin-bottom:70px">
-		<input class="btn" style="float:right;" value="Compose for SD Card" type="submit" name="submit" id="Send">
+	<div class="block" style="width:300px; margin-bottom:70px;">
+		<input class="btn_green" style="float:right;" value="Compose for SD Card" type="submit" name="submit" id="Send">
 	</div>
 </form>
+
+<div style="margin-left: 150px;"><a class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=config">Help me</a></div>
+<script type="text/javascript">
+		$(document).ready(function() {
+		$("#help").fancybox({
+			maxWidth	: 700,
+			maxHeight	: 500,
+			fitToView	: false,
+			width		: '70%',
+			height		: '70%',
+			autoSize	: false,
+			closeClick	: false,
+			openEffect	: 'none',
+			closeEffect	: 'none'
+		});
+	});
+</script>
 
 <?php if(isset($_GET['mode'])) { ?>
 <script>

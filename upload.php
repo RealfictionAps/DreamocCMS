@@ -46,12 +46,12 @@ while($file = readdir($dirhandle)) //Loop gennem mappen
 			$count = $i++;
 			$ext = pathinfo($file, PATHINFO_EXTENSION);
 			?>
-            <div style=' background-color:#FFFDA1; margin: 10px 10px 10px 0px; padding-bottom: 80px;'>
+            <div style='background-color:#D4D4D4; margin: 10px 10px 10px 0px; padding-bottom: 80px;'>
 			  <div style='float:left; padding-left:10px; margin-top:10px;'><span style='font-size: 20px; text-decoration:none;'>
-            	<a class="video-<?php echo $count; ?>" data-fancybox-type="iframe" href="video.php?video=<?php echo "$dirname$file&ext=$ext"; ?>"><? echo "$ShortFileName $end"; ?></a></span><br>Fil #<?php echo "$count"; ?>
+            	<a class="video-<?php echo $count; ?>" data-fancybox-type="iframe" style="color:#1A9EEC !important;" href="video.php?video=<?php echo "$dirname$file&ext=$ext"; ?>"><? echo "$ShortFileName $end"; ?></a></span><br>Fil #<?php echo "$count"; ?>
               </div>
 			<div style='float:right; margin-top: 13px; margin-right: 15px;'>
-            	<a href='index.php?del=<?php echo $file; ?>' title='Delete this' class='btn'>X</a>
+            	<a href='index.php?del=<?php echo $file; ?>' title='Delete this' class='btn_red'>X</a>
               </div>
 			</div>
             <script type="text/javascript">
@@ -122,7 +122,7 @@ fclose($fil); //Luk filen
 }
 ?>
       </td>
-      <td width="213" valign="top">
+      <td width="250" valign="top">
 <script type="text/javascript">
 $(document).ready(function(){
     var form = $('#desc1'),
@@ -139,14 +139,20 @@ $(document).ready(function(){
 })
 </script>
 <div style="padding-top: 10px; margin-left: 10px; font-size: 20px;">
+<?php if(isset($_GET['upd'])) { ?>
+<div style="border: solid #989898; margin-bottom: 20px; border-radius: 10px; padding: 10px;">
 <form method="post" action="#" name="desc1" id="desc1">
-<label>Description:</label>
-<input style="font-size: 16px;" name="desc" type="text" value="<?php $descIn = file_get_contents("$dir/$userL/description.txt"); echo strip_tags($descIn); ?>">
-<br>
-<input class="btn_green" type="submit" value="Update">
+<label>Dreamoc group / location:</label>
+<input style="font-size: 20px; width: 210px;" name="desc" type="text" autofocus placeholder="My Dreamoc" value="<?php $descIn = file_get_contents("$dir/$userL/description.txt"); echo strip_tags($descIn); ?>">
+<input style="margin-top: 10px;" class="btn_green" type="submit" value="Ok">
 </form>
-<br>
-<a class="btn" id="help" data-fancybox-type="iframe" href="help.php">HELP ME</a>
+</div>
+<?php } else { ?>
+<div style="margin-bottom: 5px;">Dreamoc group / location:</div>
+<a class="btn_blue" href="?upd=1"><?php $descIn = file_get_contents("$dir/$userL/description.txt"); if($descIn != '') { echo strip_tags($descIn); } else { echo "My Dreamoc"; } ?></a>
+<br><br><br>
+<?php } ?>
+<a class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=upload">HELP ME</a>
 
 <script type="text/javascript">
 		$(document).ready(function() {

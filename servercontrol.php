@@ -65,24 +65,26 @@ $(document).ready(function(){
 <div class="wrap">
 <!-- how to hide: http://jsfiddle.net/sowdri/8vbyD/5/ -->
 
-              Enable<br><br>
+              Enable&nbsp;&nbsp;&nbsp;<span title="This enables / disables the system control of the dreamoc's sound - and light settings. If it is off, all settings are ruled by the physical dreamoc settings." class="tooltip">?</span><br><br>
               <input type="checkbox" class="slider-v3" id="flipSC" name="flipSC" onChange="toggle()" <?php echo $resetControl; ?> />
               <label for="flipSC"></label>
               <div style=" margin-left: 165px; margin-top: -27px; position:absolute; color:#9E9E9E;">Off</div>
               <div style=" margin-left: 315px; margin-top: -27px; position:absolute; color:#9E9E9E;">On</div>
 <br><br>
+<?php if($resetControl == 'checked') { ?>
         <label>Sound volume</label>
         <input type="text" id="range" value="<?php echo $volume_value; ?>" name="sliderSound" />
 <br><br><br><br>
-              Light control:<br><br>
+              Light control&nbsp;&nbsp;&nbsp;<span title="Here you can set the spotligt level of your Dreamoc. If it's on manual, the settings on the Dreamoc decide the level." class="tooltip">?</span><br><br>
               <input type="checkbox" class="slider-v3" id="flipSO" name="flipSO" <?php echo $spotlightOptions; ?> />
               <label for="flipSO"></label>
               <div style=" margin-left: 140px; margin-top: -27px; position:absolute; color:#9E9E9E;">Manual</div>
               <div style=" margin-left: 315px; margin-top: -27px; position:absolute; color:#9E9E9E;">Auto</div>
 <br><br><br>
+<?php if($spotlightOptions == '') { ?>
         <label>Manual light level</label>
         <input type="text" id="range2" value="<?php echo $manual_step; ?>" name="sliderLight" />
-        
+   <?php } } ?>     
 </div>
 <div style="padding-bottom: 50px;">
 <script src="js/ion.rangeSlider.js"></script>
@@ -184,13 +186,29 @@ $(document).ready(function(){
 </script> 
 </div>
 
-        <input name="conf" type="submit" class="btn" value="Update">
+        <input name="conf" type="submit" class="btn_green" value="Update">
 <?php
 	if(isset($_GET['updated'])) {
 		echo "<div align='center' style='color:green; padding-top: 10px; font-weight: bold;'>-- DONE --</div>";
 	}
 ?>
 </form>
+<br><br><a class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=serverc">Help me</a>
+<script type="text/javascript">
+		$(document).ready(function() {
+		$("#help").fancybox({
+			maxWidth	: 700,
+			maxHeight	: 500,
+			fitToView	: false,
+			width		: '70%',
+			height		: '70%',
+			autoSize	: false,
+			closeClick	: false,
+			openEffect	: 'none',
+			closeEffect	: 'none'
+		});
+	});
+</script>
 </div>
 <?php
 	if(isset($_POST['conf'])) { // #### Åben en brugers kort, hvis det er blevet spærret
@@ -198,12 +216,14 @@ $(document).ready(function(){
 		if($flipSC == 'on') { $flipSC = "enable"; } else { $flipSC = "disable"; }
 		$flipSO = $_POST['flipSO'];
 		if($flipSO == 'on') { $flipSO = "auto"; } else { $flipSO = "manual"; }
-		if($resetControl == '' && $flipSC == 'enable') { 
+
+		if($resetControl == '' && $flipSC == 'enable' || $_POST['sliderLight'] == 0 && $manual_step > 0) { 
 			$sliderLight = $manual_step;
 			$sliderSound = $volume_value; } 
 		else { 
 			$sliderLight = $_POST['sliderLight'];
 			$sliderSound = $_POST['sliderSound']; }
+			
 		
 		$content = "<?xml version='1.0' encoding='utf-8' ?>
 <server_setting>
