@@ -5,6 +5,7 @@ include_once 'includes/functions.php';
 sec_session_start();
 
 if (login_check($mysqli) == true) : ?>
+
 <div align="center" style="width: 680px;">
 	<div style="margin-right: 220px;"><h1>Upload files to your dreamoc</h1></div>
 <br><br>
@@ -122,11 +123,26 @@ fclose($fil); //Luk filen
 ?>
       </td>
       <td width="213" valign="top">
-<div style="padding-top: 10px; margin-left: 10px;">
-<form method="post" action="#">
-<label><div style="font-size: 20px;">Description:</div></label>
+<script type="text/javascript">
+$(document).ready(function(){
+    var form = $('#desc1'),
+        original = form.serialize()
+
+    form.submit(function(){
+        window.onbeforeunload = null
+    })
+
+    window.onbeforeunload = function(){
+        if (form.serialize() != original)
+            return 'You have made changes to your settings. Are you sure you want to leave?'
+    }
+})
+</script>
+<div style="padding-top: 10px; margin-left: 10px; font-size: 20px;">
+<form method="post" action="#" name="desc1" id="desc1">
+<label>Description:</label>
 <input style="font-size: 16px;" name="desc" type="text" value="<?php $descIn = file_get_contents("$dir/$userL/description.txt"); echo strip_tags($descIn); ?>">
-<br><br>
+<br>
 <input class="btn_green" type="submit" value="Update">
 </form>
 <br>

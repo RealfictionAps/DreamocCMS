@@ -28,7 +28,7 @@
 
 		<ntp_ip>204.152.184.72</ntp_ip>
 	  <ntp_timezone_adjust>+</ntp_timezone_adjust> 
-		<ntp_timezone>02:00</ntp_timezone>
+		<ntp_timezone>02:00q</ntp_timezone>
 	</ntp_setting>
 	<autopower_setting>
 		<autopower_options>off</autopower_options> 

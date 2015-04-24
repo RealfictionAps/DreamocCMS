@@ -46,7 +46,21 @@ $volume_value = $xml->volume_setting[0]->volume_value;
 	if($spotlight_options == 'auto') { $spotlightOptions = 'checked'; }
 
 ?>
+<script type="text/javascript">
+$(document).ready(function(){
+    var form = $('#soundLight'),
+        original = form.serialize()
 
+    form.submit(function(){
+        window.onbeforeunload = null
+    })
+
+    window.onbeforeunload = function(){
+        if (form.serialize() != original)
+            return 'You have made changes to your settings. Are you sure you want to leave?'
+    }
+})
+</script>
 <form id="soundLight" name="soundLight" method="post" action="servercontrol.php">
 <div class="wrap">
 <!-- how to hide: http://jsfiddle.net/sowdri/8vbyD/5/ -->
