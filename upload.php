@@ -51,7 +51,7 @@ while($file = readdir($dirhandle)) //Loop gennem mappen
             	<a class="video-<?php echo $count; ?>" data-fancybox-type="iframe" href="video.php?video=<?php echo "$dirname$file&ext=$ext"; ?>"><? echo "$ShortFileName $end"; ?></a></span><br>Fil #<?php echo "$count"; ?>
               </div>
 			<div style='float:right; margin-top: 13px; margin-right: 15px;'>
-            	<a href='index.php?del=$file' title='Delete this' class='btn'>X</a>
+            	<a href='index.php?del=<?php echo $file; ?>' title='Delete this' class='btn'>X</a>
               </div>
 			</div>
             <script type="text/javascript">

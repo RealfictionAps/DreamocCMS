@@ -48,7 +48,7 @@ $volume_value = $xml->volume_setting[0]->volume_value;
 ?>
 <script type="text/javascript">
 $(document).ready(function(){
-    var form = $('#soundLightX'),
+    var form = $('#soundLight'),
         original = form.serialize()
 
     form.submit(function(){
@@ -198,8 +198,12 @@ $(document).ready(function(){
 		if($flipSC == 'on') { $flipSC = "enable"; } else { $flipSC = "disable"; }
 		$flipSO = $_POST['flipSO'];
 		if($flipSO == 'on') { $flipSO = "auto"; } else { $flipSO = "manual"; }
-		$sliderLight = $_POST['sliderLight'];
-		$sliderSound = $_POST['sliderSound'];
+		if($resetControl == '' && $flipSC == 'enable') { 
+			$sliderLight = $manual_step;
+			$sliderSound = $volume_value; } 
+		else { 
+			$sliderLight = $_POST['sliderLight'];
+			$sliderSound = $_POST['sliderSound']; }
 		
 		$content = "<?xml version='1.0' encoding='utf-8' ?>
 <server_setting>
