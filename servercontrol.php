@@ -65,7 +65,7 @@ $(document).ready(function(){
 <div class="wrap">
 <!-- how to hide: http://jsfiddle.net/sowdri/8vbyD/5/ -->
 
-              Enable&nbsp;&nbsp;&nbsp;<span title="This enables / disables the system control of the dreamoc's sound - and light settings. If it is off, all settings are ruled by the physical dreamoc settings." class="tooltip">?</span><br><br>
+              Enable&nbsp;&nbsp;&nbsp;<span title2="This enables / disables the system control of the dreamoc's sound - and light settings. If it is off, all settings are ruled by the physical dreamoc settings." id="tooltip" class="tooltip">?</span><br><br>
               <input type="checkbox" class="slider-v3" id="flipSC" name="flipSC" onChange="toggle()" <?php echo $resetControl; ?> />
               <label for="flipSC"></label>
               <div style=" margin-left: 165px; margin-top: -27px; position:absolute; color:#9E9E9E;">Off</div>
@@ -75,7 +75,7 @@ $(document).ready(function(){
         <label>Sound volume</label>
         <input type="text" id="range" value="<?php echo $volume_value; ?>" name="sliderSound" />
 <br><br><br><br>
-              Light control&nbsp;&nbsp;&nbsp;<span title="Here you can set the spotligt level of your Dreamoc. If it's on manual, the settings on the Dreamoc decide the level." class="tooltip">?</span><br><br>
+              Light control&nbsp;&nbsp;&nbsp;<span title2="Here you can set the spotligt level of your Dreamoc. If it's on manual, the settings on the Dreamoc decide the level." class="tooltip">?</span><br><br>
               <input type="checkbox" class="slider-v3" id="flipSO" name="flipSO" <?php echo $spotlightOptions; ?> />
               <label for="flipSO"></label>
               <div style=" margin-left: 140px; margin-top: -27px; position:absolute; color:#9E9E9E;">Manual</div>
