@@ -66,8 +66,8 @@ if (login_check($mysqli) == false) { echo '<meta http-equiv="refresh" content="0
 ?> 
     <div class="topbar">
         <div style=" position:absolute; float: left; margin-left: 100px; margin-top: -3px;"><img width="280" src="assets/img/logo.png"></div>
-        <div style="float: right; text-align:right;">Logged in as: <?php echo $userL; ?><br><a href="includes/logout.php">log out</a></div>
-    </div>
+        <div style="float: right; text-align:right;">Logged in as: <br><a href="includes/logout.php">log out</a></div>
+    <span style="float: right; text-align:right;"><?php echo $userL; ?></span></div>
 <div style="clear:both;"></div>
     <div style="float:left; width:100%;">
     <div class="side bar">

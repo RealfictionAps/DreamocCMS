@@ -15,6 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+ 
+include_once 'includes/db_connect.php';
+include_once 'includes/functions.php';
+
+sec_session_start();
+
+if (login_check($mysqli) == true && htmlentities($_SESSION['username']) == "emil1") :
+
 include_once 'includes/register.inc.php';
 include_once 'includes/functions.php';
 ?>
@@ -70,3 +78,8 @@ include_once 'includes/functions.php';
         <p>Return to the <a href="index.php">login page</a>.</p>
     </body>
 </html>
+        <?php else : ?>
+            <p>
+                <span class="error">You are not authorized to access this page.</span> Please <a href="login.php">login</a>.
+            </p>
+        <?php endif; ?>

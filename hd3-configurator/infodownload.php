@@ -16,7 +16,7 @@
     NB! Make sure the config file name is exactly &quot;config.xml&quot; on the SD Card.
   </div>
   </p>
-  <p><a href="download.php" class="btn">Download for SD Card</a></p>
+  <p><a href="download.php" class="btn_green">Download for SD Card</a></p>
 </div>
 </body>
 </html>

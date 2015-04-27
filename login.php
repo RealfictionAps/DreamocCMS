@@ -50,7 +50,7 @@ $detect = new Mobile_Detect;
  
 // Any mobile device (phones or tablets).
 if ( $detect->isMobile() ) {
-echo '<div align="center" style="font-size: 60px; margin-top: 0px;">Du skal bruge din computer, hvis du vil tage testen</div>';
+echo '<div align="center" style="font-size: 60px; margin-top: 0px;">You cannot use the DreamocCMS on a mobile device.</div>';
 }
 else {
 ?>
@@ -70,7 +70,7 @@ else {
 </table>
           <div style="clear:both;"></div>
             <div align="center">
-            	<input type="submit" value="Login" class="btn" onclick="formhash(this.form, this.form.password);" /> 
+            	<input type="submit" value="Login" class="btn_green" onclick="formhash(this.form, this.form.password);" /> 
             </div>
           </form>
         
