@@ -21,7 +21,7 @@ include_once 'includes/functions.php';
 
 sec_session_start();
 
-if (login_check($mysqli) == true && htmlentities($_SESSION['username']) == "emil1") :
+if (login_check($mysqli) == true && htmlentities($_SESSION['username']) == "$adminUL") :
 
 include_once 'includes/register.inc.php';
 include_once 'includes/functions.php';

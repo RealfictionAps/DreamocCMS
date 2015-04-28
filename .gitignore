@@ -3,3 +3,7 @@ netbeans/*
 *#
 
 *.mov
+*.DS_Store
+*.avi
+*.MOV
+*.mp4

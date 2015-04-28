@@ -66,8 +66,48 @@ if (login_check($mysqli) == false) { echo '<meta http-equiv="refresh" content="0
 ?> 
     <div class="topbar">
         <div style=" position:absolute; float: left; margin-left: 100px; margin-top: -3px;"><img width="280" src="assets/img/logo.png"></div>
-        <div style="float: right; text-align:right;">Logged in as: <br><a href="includes/logout.php">log out</a></div>
-    <span style="float: right; text-align:right;"><?php echo $userL; ?></span></div>
+        <div style="float: right; text-align:right;">Logged in as: <?php echo $userL; ?><br><a href="includes/logout.php">log out</a></div>
+        <script type="text/javascript">
+$(document).ready(function(){
+    var form = $('#desc1'),
+        original = form.serialize()
+
+    form.submit(function(){
+        window.onbeforeunload = null
+    })
+
+    window.onbeforeunload = function(){
+        if (form.serialize() != original)
+            return 'You have made changes to your settings. Are you sure you want to leave?'
+    }
+})
+</script>
+<div style="float:right;  padding-top: 0px; margin-right: 20px;">
+<?php if(isset($_GET['upd'])) { ?>
+<div style=" position:absolute; border: solid 1px #fff; border-radius: 10px; margin-left: -400px; margin-top: -10px; padding: 3px;">
+<form method="post" action="#" name="desc1" id="desc1">
+<label>Name your Group:</label>
+<input style="width: 210px;" name="desc" type="text" autofocus placeholder="My Dreamoc" value="<?php $descIn = file_get_contents("$dir/$userL/description.txt"); echo strip_tags($descIn); ?>">
+<input type="hidden" name="p" value="<?php echo $_GET['p']; ?>">
+<input class="btn_green" type="submit" value="Ok">
+</form>
+</div>
+<?php } else { ?>
+Name your Group:
+<a class="btn_blue" href="?p=<?php echo $_GET['p']; ?>&upd=1"><?php $descIn = file_get_contents("$dir/$userL/description.txt"); if($descIn != '') { echo strip_tags($descIn); } else { echo "My Dreamoc"; } ?></a>
+<?php } 
+if(isset($_POST['desc'])) {
+	$desc = $_POST['desc'];
+	$pReturn = $_POST['p'];
+	$fil = fopen("$dir/$userL/description.txt", "w"); //Åben tekstfilen 
+	fwrite($fil, "$desc");
+	fclose($fil); //Luk filen
+	echo '<meta http-equiv="refresh" content="0; url=index.php?p=' .$pReturn . '">';
+}
+?>
+    </div>
+    </div>
+    
 <div style="clear:both;"></div>
     <div style="float:left; width:100%;">
     <div class="side bar">
@@ -75,6 +115,8 @@ if (login_check($mysqli) == false) { echo '<meta http-equiv="refresh" content="0
         <li><a href="?p=upload" <?php if($p == 'upload') { echo 'id="document"'; } ?> title="Upload & manage content"><span class="fontawesome-cloud-upload"></span></a></li>
         <li><a href="?p=servercontrol" <?php if($p == 'servercontrol') { echo 'id="document"'; } ?> title="Settings"><span class="fontawesome-tasks"></span></a></li>
         <li><a href="?p=hd3conf" <?php if($p == 'hd3conf') { echo 'id="document"'; } ?> title="Download configuration file"><span class="fontawesome-magnet"></span></a></li>
+        <li><a href="?p=legal" <?php if($p == 'legal') { echo 'id="document"'; } ?> title="Info"><span class="fontawesome-legal"></span></a></li>
+      <?php if($userL == $adminUL) { ?><li><a href="?p=register" <?php if($p == 'user') { echo 'id="document"'; } ?> title="Info"><span class="fontawesome-user"></span></a></li><?php } ?>
       </ul>
     </div>
             <div style="position:absolute; margin-bottom: 10px;	bottom:0; margin-left: 0px; margin-right: 5px; color:#fff; font-size:10px;";>

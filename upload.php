@@ -8,8 +8,27 @@ if (login_check($mysqli) == true) : ?>
 
 <div align="center" style="width: 680px;">
 	<div style="margin-right: 220px;"><h1>Upload files to your dreamoc</h1></div>
+
+<div style="position:absolute; margin-top: -35px; margin-left: 440px;">
+<a class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=upload">?</a>
+<script type="text/javascript">
+		$(document).ready(function() {
+		$("#help").fancybox({
+			maxWidth	: 700,
+			maxHeight	: 500,
+			fitToView	: false,
+			width		: '70%',
+			height		: '70%',
+			autoSize	: false,
+			closeClick	: false,
+			openEffect	: 'none',
+			closeEffect	: 'none'
+		});
+	});
+</script>
+</div>
 <br><br>
-        <form style="float:left; margin-left: 60px; width: 300px;">
+        <form style="float:left; margin-left: 80px; width: 300px;">
           <div id="queue"></div>
           <p>
             <input type="file" name="file_upload" id="file_upload" />
@@ -17,16 +36,14 @@ if (login_check($mysqli) == true) : ?>
         </form>
 
 <div style="clear:both;"></div>
+<?php if(isset($_GET['run'])) { echo "<div style='color:green; padding-top: -10px; padding-bottom: 15px; font-weight: bold; margin-right: 200px;'>Your Dreamocs are updated</div>"; } ?>
 
-      <div style="float:left;">
-      <h3>Content list: <!-- Active content --></h3>
+      <div style="float:left; font-weight: bold; margin-bottom: 20px;">
+      Content list:
       </div>
 <div style="clear:both;"></div>
-<table width="0" border="0" cellspacing="0" cellpadding="0">
-  <tbody>
-    <tr>
-      <td width="482" valign="top" style="border-right-style: dashed; border-color:#CDCBCB;">
-	  <?php
+
+<?php
 $dir = "$dir/$userL/"; //Hvor skal den lede efter filer?
 $i = 1;
 $directories = array();
@@ -60,8 +77,8 @@ foreach($files_list as $file_list){
 			$count = $i++;
 			$ext = pathinfo($file_list, PATHINFO_EXTENSION);
 			?>
-            <div style='background-color:#D4D4D4; margin: 10px 10px 10px 0px; padding-bottom: 50px;'>
-			  <div style='float:left; padding-left:10px; margin-top:10px;'><span style='font-size: 20px; text-decoration:none;'>
+            <div style='background-color:#D4D4D4; float:left; width: 500px; padding-bottom: 20px; margin-bottom: 10px;'>
+			  <div style='float:left; padding-left:10px; margin-top:10px;'><span style='text-decoration:none;'>
             	<a class="video-<?php echo $count; ?>" data-fancybox-type="iframe" style="color:#1A9EEC !important;" href="video.php?video=<?php echo "$dir$file_list&ext=$ext"; ?>"><? echo "$ShortFileName $end"; ?></a></span><!--<br>Fil #<?php echo "$count"; ?>-->
               </div>
 			<div style='float:right; margin-top: 13px; margin-right: 15px;'>
@@ -126,76 +143,15 @@ fclose($fil); //Luk filen
 ?>
 <?php } ?>
 
-      </td>
-      <td width="250" valign="top">
-<script type="text/javascript">
-$(document).ready(function(){
-    var form = $('#desc1'),
-        original = form.serialize()
 
-    form.submit(function(){
-        window.onbeforeunload = null
-    })
-
-    window.onbeforeunload = function(){
-        if (form.serialize() != original)
-            return 'You have made changes to your settings. Are you sure you want to leave?'
-    }
-})
-</script>
-<div style="padding-top: 10px; margin-left: 10px; font-size: 20px;">
-<?php if(isset($_GET['upd'])) { ?>
-<div style="border: solid #989898; margin-bottom: 20px; border-radius: 10px; padding: 10px;">
-<form method="post" action="#" name="desc1" id="desc1">
-<label>Dreamoc / Group Name:</label>
-<input style="font-size: 20px; width: 210px;" name="desc" type="text" autofocus placeholder="My Dreamoc" value="<?php $descIn = file_get_contents("$dir/description.txt"); echo strip_tags($descIn); ?>">
-<input style="margin-top: 10px;" class="btn_green" type="submit" value="Ok">
-</form>
-</div>
-<?php } else { ?>
-<div style="margin-bottom: 5px;">Dreamoc / Group Name:</div>
-<a class="btn_blue" href="?upd=1"><?php $descIn = file_get_contents("$dir/description.txt"); if($descIn != '') { echo strip_tags($descIn); } else { echo "My Dreamoc"; } ?></a>
-<br><br><br>
-<?php } ?>
-<a class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=upload">Help me</a>
-
-<script type="text/javascript">
-		$(document).ready(function() {
-		$("#help").fancybox({
-			maxWidth	: 700,
-			maxHeight	: 500,
-			fitToView	: false,
-			width		: '70%',
-			height		: '70%',
-			autoSize	: false,
-			closeClick	: false,
-			openEffect	: 'none',
-			closeEffect	: 'none'
-		});
-	});
-</script>
 <?php
-if(isset($_POST['desc'])) {
-	$desc = $_POST['desc'];
-	$fil = fopen("$dir/description.txt", "w"); //Åben tekstfilen 
-	fwrite($fil, "$desc");
-	fclose($fil); //Luk filen
-	echo '<meta http-equiv="refresh" content="0; url=index.php">';
-}
-
-if(isset($_GET['run'])) { echo "<div style='color:green; padding-top: 15px; font-weight: bold;'>Your Dreamocs are updated</div>"; }
-
 if(isset($_GET['del'])) {
 	$fileDel = $_GET['del'];
 	unlink("$dir/$fileDel");
 	echo '<meta http-equiv="refresh" content="0; url=index.php?run=y">';
 }
 ?>
-</div>
-     </td>
-    </tr>
-  </tbody>
-</table>
+
 </div>
         <?php else : ?>
             <p>

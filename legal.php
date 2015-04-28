@@ -1,6 +1,10 @@
 
-<div align="center" style="width: 600px;">
-<h1 style="margin-left: -50px;">Dreamoc HD3 Configurator</h1>
+<div align="center" style="width: 400px;">
+<h1 style="">Legal notice</h1>
+</div>
+<div style="width: 400px;">
+<p>
+  <!--
 <div style="position:absolute; margin-top: -35px; margin-left: 470px;">
 <a class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=upload">?</a>
 <script type="text/javascript">
@@ -20,7 +24,7 @@
 </script>
 </div>
 
-	<script type="text/javascript">
+<script type="text/javascript">
 $(document).ready(function(){
     var form = $('#formdchp'),
         original = form.serialize()
@@ -35,7 +39,11 @@ $(document).ready(function(){
     }
 })
 </script>
-	<?php
-	include('hd3-configurator/index.php');
-	?>
+-->
+  
+  <br><br>
+  For now, you can maximumn upload 500 mb. videos to this service. This can be scaled over time.</p>
+<p>As you manage the code to our ftp host, if you are hacked or people gain acces to your ftp on our server, we cant be held responsible for any kind of lost for your company.</p>
+<p>&nbsp;</p>
+<p>Realfiction Aps</p>
 </div>

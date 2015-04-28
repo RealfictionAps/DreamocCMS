@@ -9,10 +9,10 @@
 <div align="left" style="padding:30px;">
 <form action="hd3-configurator/callweb.php" method="post" name="formdchp" id="formdchp">
 
-<div style="font-size: 18px; margin-left: -10px; margin-bottom: 10px; color:#606060;">1: Choose Dreamoc Location</div>
+<div style="margin-left: -10px; margin-bottom: 10px; color:#606060;">1: Choose Dreamoc Location</div>
 	
 	<div class="block">        
-      <select style="font-size: 24px; width:88%;" name="ntp_timezone" id="ntp_timezone">
+      <select style="width:88%;" name="ntp_timezone" id="ntp_timezone">
       <option value="-12:00">(GMT -12:00) Eniwetok, Kwajalein</option>
       <option value="-11:00">(GMT -11:00) Midway Island, Samoa</option>
       <option value="-10:00">(GMT -10:00) Hawaii</option>
@@ -48,7 +48,7 @@
 		 <span title='Choose the timezone of where your Dreamoc is placed physically.' class="masterTooltip">?</span>
 	</div>
 
-   <div style="font-size: 18px; margin-left: -10px; margin-bottom: 10px; margin-top: 40px; color:#606060;">2: Timer setting</div>
+   <div style="margin-left: -10px; margin-bottom: 10px; margin-top: 40px; color:#606060;">2: Timer setting</div>
    	<div class="block">
 		<label>Update content on power up:</label>
 		<input name="auto_boot" size="30" type="radio"  checked="checked" value="on" ><span>ON</span>
@@ -90,12 +90,12 @@
 	
 	<div class="block">
 		<label>Dreamoc power on time:</label>
-		<input name="poweron_time" id="poweron_time" size="30" value="07:30:00" type="text"> 
+		<input name="poweron_time" type="text" id="poweron_time" placeholder="07:30:00" value="07:30:00" size="30"> 
 		<span title='The specific time a day, where the Dreamoc should power ON. Range can be set from 00:00:00 to 23:59:59 (hh:mm:ss).' class="masterTooltip">?</span>
 	</div>	
 	<div class="block">
 		<label>Dreamoc power off time:</label>
-		<input name="poweroff_time" id="poweroff_time" size="30" value="20:00:00" type="text"> 
+		<input name="poweroff_time" type="text" id="poweroff_time" placeholder="20:00:00" value="20:00:00" size="30"> 
 		<span title='The specific time a day, where the Dreamoc should power OFF. Range can be set from 00:00:00 to 23:59:59 (hh:mm:ss).' class="masterTooltip">?</span>
 	</div>
 	
@@ -105,22 +105,6 @@
 	</div>
 </form>
 
-<div style="margin-left: 150px;"><a class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=config">Help me</a></div>
-<script type="text/javascript">
-		$(document).ready(function() {
-		$("#help").fancybox({
-			maxWidth	: 700,
-			maxHeight	: 500,
-			fitToView	: false,
-			width		: '70%',
-			height		: '70%',
-			autoSize	: false,
-			closeClick	: false,
-			openEffect	: 'none',
-			closeEffect	: 'none'
-		});
-	});
-</script>
 
 <?php if(isset($_GET['mode'])) { ?>
 <script>
@@ -133,9 +117,7 @@
 </script>
 <?php } ?>
 
-
-
-</div>	  
+  
         <?php else : ?>
             <p>
                 <span class="error">You are not authorized to access this page.</span> Please <a href="login.php">login</a>.
