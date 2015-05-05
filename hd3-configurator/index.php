@@ -10,41 +10,33 @@
 <form action="hd3-configurator/callweb.php" method="post" name="formdchp" id="formdchp">
 
 <div style="margin-left: -10px; margin-bottom: 10px; color:#606060;">1: Choose Dreamoc Location</div>
-	
+<?php
+/**
+ * Timezones list with GMT offset
+ *
+ * @return array
+ * @link http://stackoverflow.com/a/9328760
+ */
+function tz_list() {
+  $zones_array = array();
+  $timestamp = time();
+  foreach(timezone_identifiers_list() as $key => $zone) {
+    date_default_timezone_set($zone);
+    $zones_array[$key]['zone'] = $zone;
+    $zones_array[$key]['diff_from_GMT'] = 'UTC/GMT ' . date('P', $timestamp);
+  }
+  return $zones_array;
+}
+?>	
 	<div class="block">        
-      <select style="width:88%;" name="ntp_timezone" id="ntp_timezone">
-      <option value="-12:00">(GMT -12:00) Eniwetok, Kwajalein</option>
-      <option value="-11:00">(GMT -11:00) Midway Island, Samoa</option>
-      <option value="-10:00">(GMT -10:00) Hawaii</option>
-      <option value="-09:00">(GMT -9:00) Alaska</option>
-      <option value="-08:00">(GMT -8:00) Pacific Time (US &amp; Canada)</option>
-      <option value="-07:00">(GMT -7:00) Mountain Time (US &amp; Canada)</option>
-      <option value="-06:00">(GMT -6:00) Central Time (US &amp; Canada), Mexico City</option>
-      <option value="-05:00">(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima</option>
-      <option value="-04:00">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</option>
-      <option value="-03:50">(GMT -3:30) Newfoundland</option>
-      <option value="-03:00">(GMT -3:00) Brazil, Buenos Aires, Georgetown</option>
-      <option value="-02:00">(GMT -2:00) Mid-Atlantic</option>
-      <option value="-01:00">(GMT -1:00 hour) Azores, Cape Verde Islands</option>
-      <option value="00:00">(GMT) Western Europe Time, London, Lisbon, Casablanca</option>
-      <option selected value="+01:00">(GMT +1:00 hour) Berlin, Brussels, Copenhagen, Madrid, Paris</option>
-      <option value="+02:00">(GMT +2:00) Kaliningrad, South Africa</option>
-      <option value="+03:00">(GMT +3:00) Baghdad, Riyadh, Moscow, St: Petersburg</option>
-      <option value="+03:50">(GMT +3:30) Tehran</option>
-      <option value="+04:00">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</option>
-      <option value="+04:50">(GMT +4:30) Kabul</option>
-      <option value="+05:00">(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</option>
-      <option value="+05:50">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</option>
-      <option value="+05:75">(GMT +5:45) Kathmandu</option>
-      <option value="+06:00">(GMT +6:00) Almaty, Dhaka, Colombo</option>
-      <option value="+07:00">(GMT +7:00) Bangkok, Hanoi, Jakarta</option>
-      <option value="+08:00">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</option>
-      <option value="+09:00">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</option>
-      <option value="+09:50">(GMT +9:30) Adelaide, Darwin</option>
-      <option value="+10:00">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option>
-      <option value="+11:00">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option>
-      <option value="+12:00">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
-</select>
+  <select name="ntp_timezone" id="ntp_timezone" style="font-family: 'Courier New', Courier, monospace; width: 430px;">
+    <option value="0">Please, select timezone</option>
+    <?php foreach(tz_list() as $t) { ?>
+      <option <?php if("Europe/Berlin" == $t['zone']) { echo "selected"; } ?> value="<?php $val = str_replace("UTC/GMT ", "", $t['diff_from_GMT']); echo $val;  ?>">
+        <?php print $t['diff_from_GMT'] . ' - ' . $t['zone'] ?>
+      </option>
+    <?php } ?>
+  </select>
 		 <span title='Choose the timezone of where your Dreamoc is placed physically.' class="masterTooltip">?</span>
 	</div>
 

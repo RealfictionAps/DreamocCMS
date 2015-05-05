@@ -164,9 +164,9 @@ $(document).ready(function(){
         $("#range2").ionRangeSlider({
             hide_min_max: true,
             keyboard: true,
-            min: 0,
+            min: 1,
             max: 100,
-            from: 0,
+            from: 1,
             to: 100,
             type: 'single',
             step: 1,
@@ -185,9 +185,9 @@ $(document).ready(function(){
         $("#range2").ionRangeSlider({
             hide_min_max: true,
             keyboard: true,
-            min: 0,
+            min: 1,
             max: 100,
-            from: 0,
+            from: 1,
             to: 100,
             type: 'single',
             step: 1,

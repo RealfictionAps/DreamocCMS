@@ -50,7 +50,7 @@ $directories = array();
 $files_list  = array();
 $files = scandir($dir);
 foreach($files as $file){
-   if(($file != '.') && ($file != '..') && ($file != 'server_check.xml') && ($file != 'server_control_dreamoc_config.xml') && ($file != '.DS_Store') && ($file != 'description.txt')){
+   if(($file != '.') && ($file != '..') && ($file != 'server_check.xml') && ($file != 'server_control_dreamoc_config.xml') && ($file != '.DS_Store') && ($file != '.htaccess') && ($file != 'description.txt')){
       if(is_dir($dir.'/'.$file)){
          $directories[]  = $file;
 

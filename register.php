@@ -38,18 +38,21 @@ include_once 'includes/functions.php';
     <body>
         <!-- Registration form to be output if the POST variables are not
         set or if the registration script caused an error. -->
-        <h1>Register with us</h1>
+        <h1>Register a new user</h1>
         <?php
         if (!empty($error_msg)) {
             echo $error_msg;
         }
+		if(empty($error_msg) && isset($_GET['success'])) {
+			echo "<div style='color: red; margin: 10px;'>A new user has been created.</div>";
+		}
         ?>
-        <ul>
+        <ul class="ul">
             <li>Usernames may contain only digits, upper and lower case letters and underscores</li>
             <li>Emails must have a valid email format</li>
             <li>Passwords must be at least 6 characters long</li>
             <li>Passwords must contain
-                <ul>
+                <ul class="ul2">
                     <li>At least one upper case letter (A..Z)</li>
                     <li>At least one lower case letter (a..z)</li>
                     <li>At least one number (0..9)</li>
@@ -57,24 +60,47 @@ include_once 'includes/functions.php';
             </li>
             <li>Your password and confirmation must match exactly</li>
         </ul>
-        <form method="post" name="registration_form" action="<?php echo esc_url($_SERVER['PHP_SELF']); ?>">
-            Username: <input type='text' name='username' id='username' /><br>
-            Email: <input type="text" name="email" id="email" /><br>
-            Server: <input type="text" name="serverpass" id="serverpass" /><br>
-            Password: <input type="password"
+        <br><br>
+        <form method="post" name="registration_form" action="<?php echo esc_url($_SERVER['PHP_SELF']) . "?success=1&p=" . $_GET['p']; ?>">
+            <table width="0" border="0" cellspacing="0" cellpadding="0">
+              <tbody>
+                <tr>
+                  <td height="29" align="left" valign="top">Username:</td>
+                  <td align="left" valign="top"><input type='text' name='username' id='username' /></td>
+                </tr>
+                <tr>
+                  <td height="29" align="left" valign="top">Email:</td>
+                  <td align="left" valign="top"><input type="text" name="email" id="email" /></td>
+                </tr>
+                <tr>
+                  <td height="45" align="left" valign="top">Server:</td>
+                  <td align="left" valign="top"><input type="text" name="serverpass" id="serverpass" /></td>
+                </tr>
+                <tr>
+                  <td height="27" align="left" valign="top">Password:</td>
+                  <td align="left" valign="top"><input type="password"
                              name="password" 
-                             id="password"/><br>
-            Confirm password: <input type="password" 
+                             id="password"/></td>
+                </tr>
+                <tr>
+                  <td height="45" align="left" valign="top">Confirm password:</td>
+                  <td align="left" valign="top"><input type="password" 
                                      name="confirmpwd" 
-                                     id="confirmpwd" /><br>
-            <input type="button" 
+                                     id="confirmpwd" /></td>
+                </tr>
+                <tr>
+                  <td align="left" valign="top">&nbsp;</td>
+                  <td align="left" valign="top"><input type="button" 
                    value="Register" 
-                   onclick="return regformhash(this.form,
+                   onClick="return regformhash(this.form,
                                    this.form.username,
                                    this.form.email,
                                    this.form.password,
-                                   this.form.confirmpwd);" /> 
-        </form>
+                                   this.form.confirmpwd);" /></td>
+                </tr>
+              </tbody>
+            </table><br><br><br><br><br><br><br><br><br><br>
+    </form>
         <p>Return to the <a href="index.php">login page</a>.</p>
     </body>
 </html>

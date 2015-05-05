@@ -49,6 +49,8 @@ ul {
 	margin: 0;
 	padding: 0;
 }
+.ul { list-style: circle !important; }
+.ul2 { list-style: inside !important; }
 
 textarea {
 	border-color: #dae4eb;
