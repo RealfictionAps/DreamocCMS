@@ -36,7 +36,9 @@ if (login_check($mysqli) == true) : ?>
         </form>
 
 <div style="clear:both;"></div>
-<?php if(isset($_GET['run'])) { echo "<div style='color:green; padding-top: -10px; padding-bottom: 15px; font-weight: bold; margin-right: 200px;'>Your Dreamocs are updated</div>"; } ?>
+<?php if(isset($_GET['run'])) { 
+echo "<div style='color:green; padding-top: -10px; padding-bottom: 15px; font-weight: bold; margin-right: 200px;'>Your Dreamocs are updated</div>"; 
+} ?>
 
       <div style="float:left; font-weight: bold; margin-bottom: 20px;">
       Content list:
@@ -162,11 +164,14 @@ fclose($fil); //Luk filen
 	if(isset($_GET['del'])) {
 	$fileDel = $_GET['del'];
 	unlink("$dir/$fileDel");
-	echo '<meta http-equiv="refresh" content="0; url=index.php?run=y">';
+	echo '<meta http-equiv="refresh" content="0; url=index.php?run=y&d=1">';
 	}
 ?>
 
 </div>
+<?php if(isset($_GET['run']) && !isset($_GET['d'])) { ?>
+<div style="clear:both; margin-left: 190px; margin-top: 150px;"><a href="index.php?p=servercontrol" class="btn_blue">Next step</a></div>
+<?php } ?>
         <?php else : ?>
             <p>
                 <span class="error">You are not authorized to access this page.</span> Please <a href="login.php">login</a>.

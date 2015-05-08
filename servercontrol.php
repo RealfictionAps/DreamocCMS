@@ -8,7 +8,7 @@ if (login_check($mysqli) == true) :
 $userL = htmlentities($_SESSION['username']);
 ?>
 <div align="center" style="width: 500px;">
-<h1>Update light- and sound settings</h1>
+<h1>Update sound- and light settings</h1>
 <div style="position:absolute; margin-top: -35px; margin-left: 480px;">
 <a class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=upload">?</a>
 <script type="text/javascript">
@@ -205,11 +205,11 @@ $(document).ready(function(){
 </div>
 
         <input name="conf" type="submit" class="btn_green" value="Update">
-<?php
-	if(isset($_GET['updated'])) {
-		echo "<div align='center' style='color:green; padding-top: 10px; font-weight: bold;'>-- DONE --</div>";
-	}
-?>
+<?php if(isset($_GET['updated'])) { ?>
+    <div align='center' style="color:green; padding-top: 10px; font-weight: bold;">-- DONE --</div>
+    <br>
+    <div><a href="index.php?p=hd3conf" class="btn_blue">Next step</a></div>
+	<?php } ?>
 </form>
 </div>
 <?php
