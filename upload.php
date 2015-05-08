@@ -49,6 +49,18 @@ $i = 1;
 $directories = array();
 $files_list  = array();
 $files = scandir($dir);
+
+    $i2 = 0; 
+    if ($handle1 = opendir($dir)) {
+        while (($file1 = readdir($handle1)) !== false){
+            if (!in_array($file1, array('.', '..', 'server_check.xml', 'server_control_dreamoc_config.xml', '.DS_Store', '.htaccess', 'description.txt')) && !is_dir($dir.$file1)) { $i2++; }
+        }
+    }
+	
+$fi = new FilesystemIterator($dir, FilesystemIterator::SKIP_DOTS); // Tæller hvor mange filer (synlige) der er i folderen
+$filesC = iterator_count($fi)-$i2; // Files in folder other than content
+//$i2:  files in folder only content
+
 foreach($files as $file){
    if(($file != '.') && ($file != '..') && ($file != 'server_check.xml') && ($file != 'server_control_dreamoc_config.xml') && ($file != '.DS_Store') && ($file != '.htaccess') && ($file != 'description.txt')){
       if(is_dir($dir.'/'.$file)){
@@ -124,10 +136,7 @@ $contentNew = "
 	</file>
 ";
 
-$fi = new FilesystemIterator($dir, FilesystemIterator::SKIP_DOTS); // Tæller hvor mange filer (synlige) der er i folderen
-$filesC = iterator_count($fi)-3; // Trækker to filer fra. Alle andre filer end content filer sorteres fra
-
-if($count == $filesC) { 
+if($count == $i2) { 
 				$header = "<?xml version='1.0' encoding='utf-8' ?>\n<file_status>";
 				$footer = "</file_status>"; 
 					} // Hvis det er sidste loop, så skal den skrive headeren i linje 1
@@ -140,16 +149,21 @@ fwrite($fil, $content); //Skriv content til filen.
 fwrite($fil, $footer); //Hvis det er sidste loop, så slut med at skrive footeren til filen
 fclose($fil); //Luk filen
 }
-?>
-<?php } ?>
+} ?>
 
 
 <?php
-if(isset($_GET['del'])) {
+	if($i2 == '0') {
+	$fil = fopen("$dir/server_check.xml", "w"); //Åben tekstfilen 
+	fwrite($fil, '');
+	fclose($fil); //Luk filen
+	}
+			
+	if(isset($_GET['del'])) {
 	$fileDel = $_GET['del'];
 	unlink("$dir/$fileDel");
 	echo '<meta http-equiv="refresh" content="0; url=index.php?run=y">';
-}
+	}
 ?>
 
 </div>

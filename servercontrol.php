@@ -39,10 +39,10 @@ if (!file_exists($xmlf)) {
 </reset_setting>
 <spotlight_setting>
 	<spotlight_options>manual</spotlight_options>
-	<manual_step>80</manual_step>
+	<manual_step>75</manual_step>
 </spotlight_setting>
 <volume_setting>
-	<volume_value>50</volume_value>
+	<volume_value>20</volume_value>
 </volume_setting>
 </server_setting>";
 	$fil = fopen("$dir/$userL/server_control_dreamoc_config.xml", "w"); //Åben tekstfilen hvor antallet af hits gemmes i
