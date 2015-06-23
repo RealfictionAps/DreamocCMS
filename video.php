@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Untitled Document</title>
+
+<link href="//vjs.zencdn.net/4.12/video-js.css" rel="stylesheet">
+<script src="//vjs.zencdn.net/4.12/video.js"></script>
+
 </head>
 
 <body>
@@ -12,30 +16,15 @@ $ext=$_GET['ext'];
 ?>
 
 <div align="center" style="">
-<OBJECT id="Video5" DATA="<?php echo "$name"; ?>" TYPE="video/<?php echo "$ext"; ?>"  width="700" height="450" >
 
-      
-	<param name="AutoStart" value="true">    
-   	       <param name="src" value="<?php echo "$name"; ?>">
-	<param name="ShowControls" value="0">
-       <param name="uiMode" value="mini">
-
-      <EMBED type="video/<?php echo "$ext"; ?>"   
-	name="video6"
-        width="700"
-        height="450"
-	src="<?php echo "$name"; ?>"
-
-
-        AutoStart="true"
-
-
->
-
-       </EMBED>
-	   	   <a href ="<?php echo "$name"; ?>">File cannot be played. Download and play here.</a>
-	
-</OBJECT>
+<video id="example_video_1" class="video-js vjs-default-skin"
+  controls preload="auto" width="700" height="450"
+  data-setup='{"example_option":true}'>
+ <source src="<?php echo "$name"; ?>" type='video/<?php echo "$ext"; ?>' />
+ <!-- <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm' />
+ <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg' /> -->
+ <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+</video>
 
 </div>
 <!--

@@ -52,10 +52,27 @@ $directories = array();
 $files_list  = array();
 $files = scandir($dir);
 
+// #### Connect to MySql
+include_once 'includes/psl-config.php';
+mysql_connect(HOST, USER, PASSWORD) or die(mysql_error());
+mysql_select_db(DATABASE) or die(mysql_error());
+
+$result = mysql_query("SELECT * FROM members WHERE username = '$userL' LIMIT 1");
+while($row = mysql_fetch_array($result, MYSQL_ASSOC))
+{
+$user_id1 = "{$row['id']}"; // User ID fra members
+}
+	$result2 = mysql_query("SELECT * FROM user_meta WHERE user_id = '$user_id1' LIMIT 1");
+	while($row2 = mysql_fetch_array($result2, MYSQL_ASSOC))
+	{
+	$WaSet = "{$row2['weatherapp']}";
+	if($WaSet == 'off') { $filename = "{$row2['filename']}"; }
+	}
+
     $i2 = 0; 
     if ($handle1 = opendir($dir)) {
         while (($file1 = readdir($handle1)) !== false){
-            if (!in_array($file1, array('.', '..', 'server_check.xml', 'server_control_dreamoc_config.xml', '.DS_Store', '.htaccess', 'description.txt')) && !is_dir($dir.$file1)) { $i2++; }
+            if (!in_array($file1, array('.', '..', 'server_check.xml', 'server_control_dreamoc_config.xml', '.DS_Store', '.htaccess', 'description.txt', $filename)) && !is_dir($dir.$file1)) { $i2++; }
         }
     }
 	
@@ -64,7 +81,7 @@ $filesC = iterator_count($fi)-$i2; // Files in folder other than content
 //$i2:  files in folder only content
 
 foreach($files as $file){
-   if(($file != '.') && ($file != '..') && ($file != 'server_check.xml') && ($file != 'server_control_dreamoc_config.xml') && ($file != '.DS_Store') && ($file != '.htaccess') && ($file != 'description.txt')){
+   if(($file != '.') && ($file != '..') && ($file != 'server_check.xml') && ($file != 'server_control_dreamoc_config.xml') && ($file != '.DS_Store') && ($file != '.htaccess') && ($file != 'description.txt') && ($file != $filename)){
       if(is_dir($dir.'/'.$file)){
          $directories[]  = $file;
 
