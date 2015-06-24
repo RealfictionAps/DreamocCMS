@@ -205,11 +205,10 @@ $(document).ready(function(){
 </div>
 
         <input name="conf" type="submit" class="btn_green" value="Update">
-<?php if(isset($_GET['updated'])) { ?>
+<?php if(isset($_GET['updated'])) { // vis DONE, hvis der er klikket update ?>
     <div align='center' style="color:green; padding-top: 10px; font-weight: bold;">-- DONE --</div>
-    <br>
-    <div><a href="index.php?p=hd3conf" class="btn_blue">Next step</a></div>
 	<?php } ?>
+    <div style="padding-top: 20px;"><a href="index.php?p=hd3conf" class="btn_blue">Next step</a></div>
 </form>
 </div>
 <?php

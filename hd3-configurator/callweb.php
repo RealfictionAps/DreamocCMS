@@ -59,22 +59,22 @@ if(isset($_POST['submit'])){
 	   $auto_time_value='12:30:00';
 	 } 
 	 
-	 if($_POST['protocol_type']!=''){
+	 /*if($_POST['protocol_type']!=''){
 	   $protocol_type = 'ftp';
-	 }else{
-	   $$protocol_type = 'ftp';
-	 }
+	 }else{*/
+	   $protocol_type = 'http';
+	 //}
 	 
 	 if($_POST['protocol_url']!=''){
 	   $protocol_url = 'customercontent.dreamoc.com';
 	 }else{
 	   $protocol_url='customercontent.dreamoc.com';
 	 }
-	 if($_POST['protocol_port']!=''){
+	 /*if($_POST['protocol_port']!=''){
 	   $protocol_port = '21';
-	 }else{
-	   $protocol_port='21';
-	 }
+	 }else{*/
+	   $protocol_port='80';
+	 //}
 	 
 	 if($_POST['protocol_id']!=''){
 	   $protocol_id = strtolower($userL);
@@ -87,11 +87,11 @@ if(isset($_POST['submit'])){
 	   $protocol_pw = $serverPass;
 	 }
 	
-	if($_POST['protocol_path']!=''){
+	/*if($_POST['protocol_path']!=''){
 	   $protocol_path ="/";
-	 }else{
-	   $protocol_path="/";
-	 }
+	 }else{*/
+	   $protocol_path="/users/$userL/";
+	 //}
 	 
 	 if($_POST['ntp_options']!=''){
 	   $ntp_options =$_POST['ntp_options'];

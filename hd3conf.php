@@ -1,4 +1,3 @@
-
 <div align="center" style="width: 600px;">
 <h1 style="margin-left: -50px;">Dreamoc HD3 Configurator</h1>
 <div style="position:absolute; margin-top: -35px; margin-left: 470px;">

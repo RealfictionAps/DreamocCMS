@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Untitled Document</title>
+<title>Download for SD</title>
 <link rel="stylesheet" type="text/css" href="../css/style.css">  
 </head>
 
@@ -16,7 +16,25 @@
     NB! Make sure the config file name is exactly &quot;config.xml&quot; on the SD Card.
   </div>
   </p>
-  <p><a href="download.php" class="btn_green">Download for SD Card</a></p>
+  <script type="text/javascript">
+  	function hide(target) {
+    document.getElementById(target).style.display = 'none';
+	}
+	function show(target) {
+	document.getElementById(target).style.display = 'block';
+	}
+  </script>
+  <style>
+  #mydiv2 { display:none; }
+  </style>
+  <div id="mydiv">
+  	<a href="download.php" class="btn_green" onClick="hide('mydiv'),show('mydiv2');">Finish and download file</a>
+  </div> 
+  <div id="mydiv2">
+  	<a href="../?p=hd3conf" target="_parent" class="btn_blue">DONE</a>
+    <a href="../?p=weatherapp" target="_parent" class="btn_blue">Or try Weather App</a>
+  </div> 
+  
 </div>
 </body>
 </html>

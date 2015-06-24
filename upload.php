@@ -103,8 +103,8 @@ foreach($files_list as $file_list){
 			$fileMD5 = $path."/$dir/$file_list";  // any file_list
 			$hash = md5_file($fileMD5);
 			// SHort name
-			$ShortFileName = substr($file_list, 8, 40);
-			if(strlen($file_list) > 30) { $end = "(...)"; } else { $end = ""; }
+			$ShortFileName = substr($file_list, 8, 60);
+			if(strlen($file_list) > 40) { $end = "(...)"; } else { $end = ""; }
 			$count = $i++;
 			$ext = pathinfo($file_list, PATHINFO_EXTENSION);
 			?>
