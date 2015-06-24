@@ -23,6 +23,7 @@ $userL = htmlentities($_SESSION['username']);
 		$(function() {
 			$('#file_upload').uploadify({
 					'successTimeout' : 7,
+					'fileSizeLimit' : '200MB',
 					'buttonText' : 'Upload files',
 					'formData'  : {
 					'path'	 	: '<?php echo "/$dir/$userL";?>',

@@ -19,9 +19,11 @@ $password = "{$row2['password']}";
 $filename = "{$row2['filename']}";
 $WaSet = "{$row2['weatherapp']}";
 
-if($WaSet == 'on') {
+$rand = substr(md5($userL), 0, 8); // Skriver de første 8 tegn af users hash til filen, som kryptering
+
+if($WaSet == 'on' && isset($username) && isset($password) && isset($filename)) {
 // define some variables
-$local_file = "users/$userL/$filename";
+$local_file = "users/$userL/$rand$filename";
 $server_file = "$filename";
 $ftp_server="data.seenspire.com";
 $ftp_user_name = "$username";
@@ -43,7 +45,7 @@ else {
 // close the connection
 ftp_close($conn_id);
 
-
+}
 
 // START
 
@@ -68,7 +70,7 @@ $filesC = iterator_count($fi)-$i2; // Files in folder other than content
 //$i2:  files in folder only content
 
 foreach($files as $file){
-   if(($file != '.') && ($file != '..') && ($file != 'server_check.xml') && ($file != 'server_control_dreamoc_config.xml') && ($file != '.DS_Store') && ($file != '.htaccess') && ($file != 'description.txt') && ($file != $filename)){
+   if(($file != '.') && ($file != '..') && ($file != '._') && ($file != 'server_check.xml') && ($file != 'server_control_dreamoc_config.xml') && ($file != '.DS_Store') && ($file != '.htaccess') && ($file != 'description.txt') && ($file != $filename)){
       if(is_dir($dir.'/'.$file)){
          $directories[]  = $file;
 
@@ -140,10 +142,10 @@ fwrite($fil, $content); //Skriv content til filen.
 fwrite($fil, $footer); //Hvis det er sidste loop, så slut med at skrive footeren til filen
 fclose($fil); //Luk filen
 }
+echo "xml - ok";
 // SLUT
 
 
-}
 }
 }
 ?>

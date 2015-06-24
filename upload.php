@@ -66,13 +66,13 @@ $user_id1 = "{$row['id']}"; // User ID fra members
 	while($row2 = mysql_fetch_array($result2, MYSQL_ASSOC))
 	{
 	$WaSet = "{$row2['weatherapp']}";
-	if($WaSet == 'off') { $filename = "{$row2['filename']}"; }
+	if($WaSet == 'off') { $filename = "{$row2['filename']}"; } // Look if WeatherApp is set to include
 	}
 
     $i2 = 0; 
     if ($handle1 = opendir($dir)) {
         while (($file1 = readdir($handle1)) !== false){
-            if (!in_array($file1, array('.', '..', 'server_check.xml', 'server_control_dreamoc_config.xml', '.DS_Store', '.htaccess', 'description.txt', $filename)) && !is_dir($dir.$file1)) { $i2++; }
+            if (!in_array($file1, array('.', '..', '._', 'server_check.xml', 'server_control_dreamoc_config.xml', '.DS_Store', '.htaccess', 'description.txt', $filename)) && !is_dir($dir.$file1)) { $i2++; }
         }
     }
 	
@@ -81,7 +81,7 @@ $filesC = iterator_count($fi)-$i2; // Files in folder other than content
 //$i2:  files in folder only content
 
 foreach($files as $file){
-   if(($file != '.') && ($file != '..') && ($file != 'server_check.xml') && ($file != 'server_control_dreamoc_config.xml') && ($file != '.DS_Store') && ($file != '.htaccess') && ($file != 'description.txt') && ($file != $filename)){
+   if(($file != '.') && ($file != '..') && ($file != '._') && ($file != 'server_check.xml') && ($file != 'server_control_dreamoc_config.xml') && ($file != '.DS_Store') && ($file != '.htaccess') && ($file != 'description.txt') && ($file != $filename)){
       if(is_dir($dir.'/'.$file)){
          $directories[]  = $file;
 
@@ -103,7 +103,7 @@ foreach($files_list as $file_list){
 			$fileMD5 = $path."/$dir/$file_list";  // any file_list
 			$hash = md5_file($fileMD5);
 			// SHort name
-			$ShortFileName = substr($file_list, 0, 40);
+			$ShortFileName = substr($file_list, 8, 40);
 			if(strlen($file_list) > 30) { $end = "(...)"; } else { $end = ""; }
 			$count = $i++;
 			$ext = pathinfo($file_list, PATHINFO_EXTENSION);
