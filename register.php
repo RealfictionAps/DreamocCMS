@@ -99,9 +99,12 @@ include_once 'includes/functions.php';
                                    this.form.confirmpwd);" /></td>
                 </tr>
               </tbody>
-            </table><br><br><br><br><br><br><br><br><br><br>
+            </table>
     </form>
-        <p>Return to the <a href="index.php">login page</a>.</p>
+<hr>
+<br>
+Tools
+        <p><a href="./cron.php" target="_blank">Run cronjob</a></p>
     </body>
 </html>
         <?php else : ?>

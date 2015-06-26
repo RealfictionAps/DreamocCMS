@@ -8,7 +8,7 @@ if (login_check($mysqli) == true) : ?>
 
 <div align="center" style="width: 680px;">
 	<div style="margin-right: 220px;"><h1>Upload files to your dreamoc</h1></div>
-
+    
 <div style="position:absolute; margin-top: -35px; margin-left: 440px;">
 <a style="margin-left: 10px;" class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=upload">?</a>
 <script type="text/javascript">
@@ -27,13 +27,20 @@ if (login_check($mysqli) == true) : ?>
 	});
 </script>
 </div>
-<br><br>
-        <form style="float:left; margin-left: 80px; width: 300px;">
-          <div id="queue"></div>
-          <p>
-            <input type="file" name="file_upload" id="file_upload" />
-          </p>
-        </form>
+</div>
+
+<div style="margin-left: 160px; margin-top: 50px; width: 300px;">
+      <form>
+        <div id="queue"></div>
+        <p>
+          <input type="file" name="file_upload" id="file_upload" />
+        </p>
+      </form>
+</div>
+
+
+<div align="center" style="width: 680px;">
+
 
 <div style="clear:both;"></div>
 <?php if(isset($_GET['run'])) { 
@@ -186,7 +193,6 @@ fclose($fil); //Luk filen
 	echo '<meta http-equiv="refresh" content="0; url=index.php?run=y&d=1">';
 	}
 ?>
-
 </div>
 <?php if(isset($_GET['run']) && !isset($_GET['d'])) { ?>
 <div style="clear:both; margin-left: 190px; margin-top: 150px;"><a href="index.php?p=servercontrol" class="btn_blue">Next step</a></div>

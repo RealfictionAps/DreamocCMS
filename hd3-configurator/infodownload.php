@@ -32,7 +32,7 @@
   </div> 
   <div id="mydiv2">
   	<a href="../?p=hd3conf" target="_parent" class="btn_blue">DONE</a>
-    <a href="../?p=weatherapp" target="_parent" class="btn_blue">Or try Weather App</a>
+    <a href="../?p=weatherapp&pre=1" target="_parent" class="btn_blue">Or try Weather App</a>
   </div> 
   
 </div>

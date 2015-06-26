@@ -75,7 +75,7 @@ $(document).ready(function(){
 
     window.onbeforeunload = function(){
         if (form.serialize() != original)
-            return 'You have made changes to your settings. Are you sure you want to leave?'
+            return 'You have made changes to your settings. Are you sure you want to leave? If you leave, your settings will not be stored and your Dreamoc(s) will not be updated.'
     }
 })
 </script>
@@ -143,9 +143,9 @@ $(document).ready(function(){
         $("#range").ionRangeSlider({
             hide_min_max: true,
             keyboard: true,
-            min: 1,
+            min: 0,
             max: 100,
-            from: 1,
+            from: 0,
             to: 100,
             type: 'single',
             step: 1,
@@ -160,9 +160,9 @@ $(document).ready(function(){
         $("#range2").ionRangeSlider({
             hide_min_max: true,
             keyboard: true,
-            min: 1,
+            min: 0,
             max: 100,
-            from: 1,
+            from: 0,
             to: 100,
             type: 'single',
             step: 1,
@@ -176,20 +176,20 @@ $(document).ready(function(){
 </div>
 
 <input name="conf" type="submit" class="btn_green" value="Update">
+</form>
 <?php if(isset($_GET['updated'])) { // vis DONE, hvis der er klikket update ?>
     <div align='center' style="color:green; padding-top: 10px; font-weight: bold;">-- DONE --</div>
-	<?php } ?>
+<?php } ?>
     <div style="padding-top: 20px;"><a href="index.php?p=hd3conf" class="btn_blue">Next step</a></div>
-</form>
 </div>
 <?php
-	if(isset($_POST['conf'])) { // #### Åben en brugers kort, hvis det er blevet spærret
+	if(isset($_POST['conf'])) {
 		$flipSC = $_POST['flipSC'];
 		if($flipSC == 'on') { $flipSC = "enable"; } else { $flipSC = "disable"; }
 		$flipSO = $_POST['flipSO'];
 		if($flipSO == 'on') { $flipSO = "auto"; } else { $flipSO = "manual"; }
 
-		if($resetControl == '' && $flipSC == 'enable' || $_POST['sliderLight'] == 0 && $manual_step > 0) { 
+		if(!isset($_POST['sliderLight'])) { 
 			$sliderLight = $manual_step;
 			$sliderSound = $volume_value; } 
 		else { 

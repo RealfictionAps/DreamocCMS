@@ -39,7 +39,7 @@ $(document).ready(function(){
 
     window.onbeforeunload = function(){
         if (form.serialize() != original)
-            return 'You have made changes to your settings. Are you sure you want to leave?'
+            return 'You have made changes to your settings. Are you sure you want to leave? If you leave, your settings will not be stored and your Dreamoc(s) will not be updated.'
     }
 })
 </script>
@@ -65,6 +65,14 @@ $user_id1 = "{$row['id']}"; // User ID fra members
 	$filename = "{$row2['filename']}"; 
 	}
 ?>
+
+<?php if(isset($_GET['pre']) && $_GET['wahide'] != 1 || $filename == '' && $_GET['wahide'] != 1) { ?>
+<iframe src="https://player.vimeo.com/video/111204051?autoplay=1&color=ffffff&title=0&byline=0&portrait=0" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/111204051">Weather App - 3D weather forecast for Dreamoc</a> from <a href="https://vimeo.com/user7628333">RealFiction.com</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+<div style=" position:absolute; margin-top: -330px; margin-left: 470px;"><a href="?p=weatherapp&wahide=1" class="btn_red">X</a></div>
+<br>
+<a href="http://shop.realfiction.com/index.php/weather-app-1.html" target="_blank" class="btn_blue">Get your weather App integration here</a>
+<br><br><hr><br>
+<?php } ?>
 <form id="weatherapp" name="weatherapp" method="post" action="index.php?p=weatherapp">
 
               Enable WeatherApp&nbsp;&nbsp;&nbsp;<span title2="This enables / disables Weather App from Scenespire to run on your Dreamocs together with your other content." id="tooltip" class="tooltip">?</span><br><br>
@@ -73,17 +81,33 @@ $user_id1 = "{$row['id']}"; // User ID fra members
               <label for="toggleWA"></label>
               <div style=" margin-left: 155px; margin-top: -27px; position:absolute; color:#9E9E9E;">OFF</div>
               <div style=" margin-left: 315px; margin-top: -27px; position:absolute; color:#9E9E9E;">ON</div>
-              <br><br>
-              <label for="login">Login details for Weather App</label><br>
-              <input type="text" name="username" placeholder="username" size="30" value="<?php echo "$DBusername"; ?>" > - 
-              <input type="password" name="password" placeholder="password" size="30" value="<?php echo "$DBpassword"; ?>" ><br><br>
-              <input type="text" name="filename" placeholder="Fx HD3_Villa Hills.mp4" value="<?php echo "$filename"; ?>" >
-
-<br><br><br>
-<input name="conf" type="submit" class="btn_green" value="Update">
-<?php if(isset($_GET['updated'])) { ?>
+              <p><br>
+              <label for="login">Login details for Weather App</label>
+              </p>
+    <table width="0" border="0">
+                <tbody>
+                  <tr>
+                    <td width="95">Username:</td>
+                    <td width="243"><input type="text" name="username" placeholder="username" size="30" value="<?php echo "$DBusername"; ?>" ></td>
+                  </tr>
+                  <tr>
+                    <td>Password:</td>
+                    <td><input type="password" name="password" placeholder="password" size="30" value="<?php echo "$DBpassword"; ?>" ></td>
+                  </tr>
+                  <tr>
+                    <td>Filename:</td>
+                    <td><input name="filename" type="text" placeholder="Fx HD3_Villa Hills.mp4" value="<?php echo "$filename"; ?>" size="30" ></td>
+                  </tr>
+                </tbody>
+              </table>
+    <p>
+      <input name="conf" type="submit" class="btn_green" value="Update">
+      <?php if(isset($_GET['updated'])) { ?>
+    </p>
+    
     <div align='center' style="color:green; padding-top: 10px; font-weight: bold;">-- DONE. --<br>
-    It can cate up to 10 minutes until your Dreamoc is updated. Remember to switch &quot;Enable WeatherApp&quot; ON, above.</div>
+    It can cate up to 10 minutes until your Dreamoc is updated.<br>
+    Remember to switch &quot;Enable WeatherApp&quot; ON, above.</div>
 	<?php } ?>
 </form>
 </div>

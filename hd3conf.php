@@ -30,7 +30,7 @@ $(document).ready(function(){
 
     window.onbeforeunload = function(){
         if (form.serialize() != original)
-            return 'You have made changes to your settings. Are you sure you want to leave?'
+            return 'You have made changes to your settings. Are you sure you want to leave? If you leave, your settings will not be stored and your Dreamoc(s) will not be updated.'
     }
 })
 </script>

@@ -24,7 +24,7 @@ $userL = htmlentities($_SESSION['username']);
 			$('#file_upload').uploadify({
 					'successTimeout' : 7,
 					'fileSizeLimit' : '200MB',
-					'buttonText' : 'Upload files',
+					'buttonText' : 'UPLOAD FILES',
 					'formData'  : {
 					'path'	 	: '<?php echo "/$dir/$userL";?>',
 					'timestamp' : '<?php echo $timestamp;?>',
@@ -89,7 +89,7 @@ $(document).ready(function(){
 
     window.onbeforeunload = function(){
         if (form.serialize() != original)
-            return 'You have made changes to your settings. Are you sure you want to leave?'
+            return 'You have made changes to your settings. Are you sure you want to leave? If you leave, your settings will not be stored and your Dreamoc(s) will not be updated.'
     }
 })
 </script>

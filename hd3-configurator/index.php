@@ -61,7 +61,7 @@ function tz_list() {
         <label>Daily content update time:</label>
 		hh: <select name="auto_time_value_hh">
         <?php
-			for ($i = 1; $i <= 24; $i++) {
+			for ($i = 0; $i <= 23; $i++) {
     		if($i < 10) { $i = "0" . $i; }
 			echo "<option value='$i'>$i</option>";
 			}
@@ -69,7 +69,7 @@ function tz_list() {
         </select> 
         mm: <select name="auto_time_value_mm">
         <?php
-			for ($i = 1; $i <= 60; $i++) {
+			for ($i = 0; $i <= 59; $i++) {
     		if($i < 10) { $i = "0" . $i; }
 			echo "<option value='$i'>$i</option>";
 			}
@@ -116,7 +116,7 @@ function tz_list() {
 		<label>Dreamoc power on time:</label>
         hh: <select name="poweron_time_hh" id="poweron_time1" disabled>
         <?php
-			for ($i = 1; $i <= 24; $i++) {
+			for ($i = 0; $i <= 23; $i++) {
     		if($i < 10) { $i = "0" . $i; }
 			echo "<option value='$i'>$i</option>";
 			}
@@ -124,7 +124,7 @@ function tz_list() {
         </select> 
         mm: <select name="poweron_time_mm" id="poweron_time2" disabled>
         <?php
-			for ($i = 1; $i <= 60; $i++) {
+			for ($i = 0; $i <= 59; $i++) {
     		if($i < 10) { $i = "0" . $i; }
 			echo "<option value='$i'>$i</option>";
 			}
@@ -136,7 +136,7 @@ function tz_list() {
 		<label>Dreamoc power off time:</label>
          hh: <select name="poweroff_time_hh" id="poweroff_time1" disabled>
         <?php
-			for ($i = 1; $i <= 24; $i++) {
+			for ($i = 0; $i <= 23; $i++) {
     		if($i < 10) { $i = "0" . $i; }
 			echo "<option value='$i'>$i</option>";
 			}
@@ -144,7 +144,7 @@ function tz_list() {
         </select> 
         mm: <select name="poweroff_time_mm" id="poweroff_time2" disabled>
         <?php
-			for ($i = 1; $i <= 60; $i++) {
+			for ($i = 0; $i <= 59; $i++) {
     		if($i < 10) { $i = "0" . $i; }
 			echo "<option value='$i'>$i</option>";
 			}
