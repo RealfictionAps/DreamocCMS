@@ -1,7 +1,7 @@
 <div align="center" style="width: 600px;">
 <h1 style="margin-left: -50px;">Dreamoc HD3 Configurator</h1>
 <div style="position:absolute; margin-top: -35px; margin-left: 470px;">
-<a class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=upload">?</a>
+<a style="margin-left: 10px;" class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=upload">?</a>
 <script type="text/javascript">
 		$(document).ready(function() {
 		$("#help").fancybox({

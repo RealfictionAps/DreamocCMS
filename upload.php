@@ -10,7 +10,7 @@ if (login_check($mysqli) == true) : ?>
 	<div style="margin-right: 220px;"><h1>Upload files to your dreamoc</h1></div>
 
 <div style="position:absolute; margin-top: -35px; margin-left: 440px;">
-<a class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=upload">?</a>
+<a style="margin-left: 10px;" class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=upload">?</a>
 <script type="text/javascript">
 		$(document).ready(function() {
 		$("#help").fancybox({
@@ -66,7 +66,9 @@ $user_id1 = "{$row['id']}"; // User ID fra members
 	while($row2 = mysql_fetch_array($result2, MYSQL_ASSOC))
 	{
 	$WaSet = "{$row2['weatherapp']}";
-	if($WaSet == 'off') { $filename = "{$row2['filename']}"; } // Look if WeatherApp is set to include
+	if($WaSet == 'off') { 
+		$rand = substr(md5($userL), 0, 8); // Skriver de første 8 tegn af users hash til filen, som kryptering
+		$filename = $rand . "{$row2['filename']}"; } // Look if WeatherApp is set to include
 	}
 
     $i2 = 0; 

@@ -10,7 +10,7 @@ $userL = htmlentities($_SESSION['username']);
 <div align="center" style="width: 500px;">
 <h1>Include Weather App</h1>
 <div style="position:absolute; margin-top: -35px; margin-left: 400px;">
-<a class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=upload">?</a>
+<a style="margin-left: 10px;" class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=upload">?</a>
 <script type="text/javascript">
 		$(document).ready(function() {
 		$("#help").fancybox({
@@ -67,12 +67,12 @@ $user_id1 = "{$row['id']}"; // User ID fra members
 ?>
 <form id="weatherapp" name="weatherapp" method="post" action="index.php?p=weatherapp">
 
-              Enable&nbsp;&nbsp;&nbsp;<span title2="This enables / disables Weather App from Scenespire to run on your Dreamocs together with your other content." id="tooltip" class="tooltip">?</span><br><br>
+              Enable WeatherApp&nbsp;&nbsp;&nbsp;<span title2="This enables / disables Weather App from Scenespire to run on your Dreamocs together with your other content." id="tooltip" class="tooltip">?</span><br><br>
               
               <input type="checkbox" class="slider-v3" id="toggleWA" name="toggleWA" <?php if($WaSet == 'on') { echo 'checked'; } ?> />
               <label for="toggleWA"></label>
-              <div style=" margin-left: 165px; margin-top: -27px; position:absolute; color:#9E9E9E;">Off</div>
-              <div style=" margin-left: 315px; margin-top: -27px; position:absolute; color:#9E9E9E;">On</div>
+              <div style=" margin-left: 155px; margin-top: -27px; position:absolute; color:#9E9E9E;">OFF</div>
+              <div style=" margin-left: 315px; margin-top: -27px; position:absolute; color:#9E9E9E;">ON</div>
               <br><br>
               <label for="login">Login details for Weather App</label><br>
               <input type="text" name="username" placeholder="username" size="30" value="<?php echo "$DBusername"; ?>" > - 
@@ -82,7 +82,8 @@ $user_id1 = "{$row['id']}"; // User ID fra members
 <br><br><br>
 <input name="conf" type="submit" class="btn_green" value="Update">
 <?php if(isset($_GET['updated'])) { ?>
-    <div align='center' style="color:green; padding-top: 10px; font-weight: bold;">-- DONE. --<br>It can cate up to 10 minutes till your Dreamoc is updated. But chill, take a cup of coffee, this is done quite automatically, no worries.</div>
+    <div align='center' style="color:green; padding-top: 10px; font-weight: bold;">-- DONE. --<br>
+    It can cate up to 10 minutes until your Dreamoc is updated. Remember to switch &quot;Enable WeatherApp&quot; ON, above.</div>
 	<?php } ?>
 </form>
 </div>

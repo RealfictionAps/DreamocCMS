@@ -59,7 +59,22 @@ function tz_list() {
 	<div class="block">
 		<input type="hidden" name="auto_time" value="on">
         <label>Daily content update time:</label>
-		<input name="auto_time_value" class="" id="auto_time_value1" size="30" value="12:30:00" type="text"> 
+		hh: <select name="auto_time_value_hh">
+        <?php
+			for ($i = 1; $i <= 24; $i++) {
+    		if($i < 10) { $i = "0" . $i; }
+			echo "<option value='$i'>$i</option>";
+			}
+			?>
+        </select> 
+        mm: <select name="auto_time_value_mm">
+        <?php
+			for ($i = 1; $i <= 60; $i++) {
+    		if($i < 10) { $i = "0" . $i; }
+			echo "<option value='$i'>$i</option>";
+			}
+			?>
+        </select> 
 		<span title='The one time a day, where your dreamoc seeks if there should be new content on the server - and then download it. Range can be set from 00:00:00 to 23:59:59 (hh:mm:ss).' class="masterTooltip">?</span>
 	</div>	
 	
@@ -74,20 +89,67 @@ function tz_list() {
 <br>
 	<div class="block">
 		<label>Daily Dreamoc power schedule:</label>
-		<input name="autopower_options" id="autopower_options1" size="30"  type="radio"  value="on" ><span>ON</span>
-		<input name="autopower_options" size="30" id="autopower_options2" checked ="checked" type="radio" value="off" id="dhcp_set"><span>OFF</span>
+		<script type="text/javascript">
+      function enable()
+      {
+		 $("#poweron_time1").removeAttr('disabled');
+		 $("#poweron_time2").removeAttr('disabled');
+		 $("#poweroff_time1").removeAttr('disabled');
+		 $("#poweroff_time2").removeAttr('disabled'); //removes the disabled attribut from the  
+                                                //element whose id is 'date_end'
+      }
+	  function disable()
+      {
+         $("#poweron_time1").attr('disabled', 'false');
+		 $("#poweron_time2").attr('disabled', 'false');
+		 $("#poweroff_time1").attr('disabled', 'false');
+		 $("#poweroff_time2").attr('disabled', 'false');
+      }
+	</script>
+        <input onClick="enable()" name="autopower_options" id="autopower_options1" size="30"  type="radio"  value="on" ><span>ON</span>
+		<input onClick="disable()" name="autopower_options" size="30" id="autopower_options2" checked ="checked" type="radio" value="off" id="dhcp_set"><span>OFF</span>
 		 <span title="Should be switched to ON if you want your Dreamoc to automatically power on and off at a specific time a day. It it's OFF, the feature is disabled." class="masterTooltip">?  </span>
 	
 	</div>
 	
 	<div class="block">
 		<label>Dreamoc power on time:</label>
-		<input name="poweron_time" type="text" id="poweron_time" placeholder="07:30:00" value="07:30:00" size="30"> 
+        hh: <select name="poweron_time_hh" id="poweron_time1" disabled>
+        <?php
+			for ($i = 1; $i <= 24; $i++) {
+    		if($i < 10) { $i = "0" . $i; }
+			echo "<option value='$i'>$i</option>";
+			}
+			?>
+        </select> 
+        mm: <select name="poweron_time_mm" id="poweron_time2" disabled>
+        <?php
+			for ($i = 1; $i <= 60; $i++) {
+    		if($i < 10) { $i = "0" . $i; }
+			echo "<option value='$i'>$i</option>";
+			}
+			?>
+        </select> 
 		<span title='The specific time a day, where the Dreamoc should power ON. Range can be set from 00:00:00 to 23:59:59 (hh:mm:ss).' class="masterTooltip">?</span>
 	</div>	
 	<div class="block">
 		<label>Dreamoc power off time:</label>
-		<input name="poweroff_time" type="text" id="poweroff_time" placeholder="20:00:00" value="20:00:00" size="30"> 
+         hh: <select name="poweroff_time_hh" id="poweroff_time1" disabled>
+        <?php
+			for ($i = 1; $i <= 24; $i++) {
+    		if($i < 10) { $i = "0" . $i; }
+			echo "<option value='$i'>$i</option>";
+			}
+			?>
+        </select> 
+        mm: <select name="poweroff_time_mm" id="poweroff_time2" disabled>
+        <?php
+			for ($i = 1; $i <= 60; $i++) {
+    		if($i < 10) { $i = "0" . $i; }
+			echo "<option value='$i'>$i</option>";
+			}
+			?>
+        </select> 
 		<span title='The specific time a day, where the Dreamoc should power OFF. Range can be set from 00:00:00 to 23:59:59 (hh:mm:ss).' class="masterTooltip">?</span>
 	</div>
 	

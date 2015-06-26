@@ -53,8 +53,10 @@ if(isset($_POST['submit'])){
 	   $auto_time =$_POST['auto_time'];
 	 }
 	 
-	 if($_POST['auto_time_value']!=''){
-	   $auto_time_value =$_POST['auto_time_value'];
+	 if($_POST['auto_time_value_hh']!=''){
+	   $auto_time_value_hh =$_POST['auto_time_value_hh'];
+	   $auto_time_value_mm =$_POST['auto_time_value_mm'];
+	   $auto_time_value=$auto_time_value_hh . ":" . $auto_time_value_mm . ":00";
 	 }else{
 	   $auto_time_value='12:30:00';
 	 } 
@@ -122,13 +124,17 @@ if(isset($_POST['submit'])){
 	 }else{
 	   $autopower_options='12:34:00';
 	 }
-	 if($_POST['poweron_time']!=''){
-	   $poweron_time =$_POST['poweron_time'];
+	 if($_POST['poweron_time_hh']!=''){
+	   $poweron_time_hh =$_POST['poweron_time_hh'];
+	   $poweron_time_mm =$_POST['poweron_time_mm'];
+	   $poweron_time =$poweron_time_hh . ":" . $poweron_time_mm . ":00";
 	 }else{
 	   $poweron_time='07:30:00';
 	 }
-	 if($_POST['poweroff_time']!=''){
-	   $poweroff_time =$_POST['poweroff_time'];
+	 if($_POST['poweroff_time_hh']!=''){
+	   $poweroff_time_hh =$_POST['poweroff_time_hh'];
+	   $poweroff_time_mm =$_POST['poweroff_time_mm'];
+	   $poweroff_time =$poweroff_time_hh . ":" . $poweroff_time_mm . ":00";
 	 }else{
 	   $poweroff_time='20:00:00';
 	 }

@@ -9,8 +9,8 @@ $userL = htmlentities($_SESSION['username']);
 ?>
 <div align="center" style="width: 500px;">
 <h1>Update sound- and light settings</h1>
-<div style="position:absolute; margin-top: -35px; margin-left: 480px;">
-<a class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=upload">?</a>
+<div style="position:absolute; margin-top: -35px; margin-left: 480px; margin-right: 20px;">
+<a style="margin-left: 15px;" class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=upload">?</a>
 <script type="text/javascript">
 		$(document).ready(function() {
 		$("#help").fancybox({
@@ -84,84 +84,63 @@ $(document).ready(function(){
 <!-- how to hide: http://jsfiddle.net/sowdri/8vbyD/5/ -->
 
               Enable&nbsp;&nbsp;&nbsp;<span title2="This enables / disables the system control of the dreamoc's sound - and light settings. If it is off, all settings are ruled by the physical dreamoc settings." id="tooltip" class="tooltip">?</span><br><br>
-              <input type="checkbox" class="slider-v3" id="flipSC" name="flipSC" onChange="toggle()" <?php echo $resetControl; ?> />
+              <input type="checkbox" class="slider-v3" id="flipSC" name="flipSC" <?php echo $resetControl; ?> onclick="showMe('div1')" />
               <label for="flipSC"></label>
               <div style=" margin-left: 165px; margin-top: -27px; position:absolute; color:#9E9E9E;">Off</div>
               <div style=" margin-left: 315px; margin-top: -27px; position:absolute; color:#9E9E9E;">On</div>
 <br><br>
-<?php if($resetControl == 'checked') { ?>
+        <div id="div1" style="display: <?php if($resetControl == 'checked') { echo "block"; } else { echo "none"; } ?>;">
         <label>Sound volume</label>
         <input type="text" id="range" value="<?php echo $volume_value; ?>" name="sliderSound" />
 <br><br><br><br>
-              Light control&nbsp;&nbsp;&nbsp;<span title2="Here you can set the spotligt level of your Dreamoc. If it's on manual, the settings on the Dreamoc decide the level." class="tooltip">?</span><br><br>
-              <input type="checkbox" class="slider-v3" id="flipSO" name="flipSO" <?php echo $spotlightOptions; ?> />
+              Light control&nbsp;&nbsp;&nbsp;<span title2="Here you can set the spotligt level of your Dreamoc. If it's on manual, the slider below decides the light level. If it's on Auto, the right speaker (1kHz) volume decides the light level." class="tooltip">?</span><br><br>
+              <input type="checkbox" class="slider-v3" id="flipSO" name="flipSO" <?php echo $spotlightOptions; ?> onclick="showMeLight('div2')" />
               <label for="flipSO"></label>
               <div style=" margin-left: 140px; margin-top: -27px; position:absolute; color:#9E9E9E;">Manual</div>
               <div style=" margin-left: 315px; margin-top: -27px; position:absolute; color:#9E9E9E;">Auto</div>
 <br><br><br>
-<?php if($spotlightOptions == '') { ?>
+        <div id="div2" style="display: <?php if($spotlightOptions == '') { echo "block"; } else { echo "none"; } ?>;">
         <label>Manual light level</label>
         <input type="text" id="range2" value="<?php echo $manual_step; ?>" name="sliderLight" />
-   <?php } } ?>     
+        </div>
+</div>    
 </div>
 <div style="padding-bottom: 50px;">
 <script src="js/ion.rangeSlider.js"></script>
 
-<script type="text/javascript">	
-
-        if (!document.getElementById('flipSC').checked) {
-            
-			
-		$(function () {
-        $("#range").ionRangeSlider({
-            hide_min_max: true,
-            keyboard: true,
-            min: 0,
-            max: 100,
-            from: 0,
-            to: 100,
-            type: 'single',
-            step: 1,
-            prefix: "",
-			disable: true,
-            grid: true
-        });
-
-    });
-			
-			
-        } if (document.getElementById('flipSC').checked) {
-          
-		  
-		$(function () {
-        $("#range").ionRangeSlider({
-            hide_min_max: true,
-            keyboard: true,
-            min: 0,
-            max: 100,
-            from: 0,
-            to: 100,
-            type: 'single',
-            step: 1,
-            prefix: "",
-			disable: false,
-            grid: true
-        });
-
-    });
-		  
-		  
+<script>
+    function showMe (box) {
+        
+        var chboxs = document.getElementsByName("flipSC");
+        var vis = "none";
+        for(var i=0;i<chboxs.length;i++) { 
+            if(chboxs[i].checked){
+             vis = "block";
+                break;
+            }
         }
+        document.getElementById(box).style.display = vis;
+    }
 
-</script>  
+    function showMeLight (box) {
+        
+        var chboxs = document.getElementsByName("flipSO");
+        var vis = "block";
+        for(var i=0;i<chboxs.length;i++) { 
+            if(chboxs[i].checked){
+             vis = "none";
+                break;
+            }
+        }
+        document.getElementById(box).style.display = vis;
+    }
+</script>
+
 
 <script type="text/javascript">	
-
-        if (!document.getElementById('flipSC').checked) {
-            
 			
 		$(function () {
-        $("#range2").ionRangeSlider({
+        $("#range").ionRangeSlider({
             hide_min_max: true,
             keyboard: true,
             min: 1,
@@ -171,16 +150,12 @@ $(document).ready(function(){
             type: 'single',
             step: 1,
             prefix: "",
-			disable: true,
+			disable: false,
             grid: true
         });
 
     });
-			
-			
-        } if (document.getElementById('flipSC').checked) {
-          
-		  
+	
 		$(function () {
         $("#range2").ionRangeSlider({
             hide_min_max: true,
@@ -197,14 +172,10 @@ $(document).ready(function(){
         });
 
     });
-		  
-		  
-        }
-
 </script> 
 </div>
 
-        <input name="conf" type="submit" class="btn_green" value="Update">
+<input name="conf" type="submit" class="btn_green" value="Update">
 <?php if(isset($_GET['updated'])) { // vis DONE, hvis der er klikket update ?>
     <div align='center' style="color:green; padding-top: 10px; font-weight: bold;">-- DONE --</div>
 	<?php } ?>
