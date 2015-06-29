@@ -10,12 +10,12 @@ $userL = htmlentities($_SESSION['username']);
 <div align="center" style="width: 500px;">
 <h1>Include Weather App</h1>
 <div style="position:absolute; margin-top: -35px; margin-left: 400px;">
-<a style="margin-left: 10px;" class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=upload">?</a>
+<a style="margin-left: 10px;" class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=weatherapp">?</a>
 <script type="text/javascript">
 		$(document).ready(function() {
 		$("#help").fancybox({
 			maxWidth	: 700,
-			maxHeight	: 500,
+			maxHeight	: 900,
 			fitToView	: false,
 			width		: '70%',
 			height		: '70%',

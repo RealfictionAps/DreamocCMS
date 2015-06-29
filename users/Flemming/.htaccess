@@ -1,2 +1,0 @@
-RewriteEngine on
-RewriteRule ^(.*)\.(mov|mp4|MOV|MP4)$ /downloadhtaccess/download.php?file=$1.$2 [R,L]

@@ -37,7 +37,7 @@ $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
 // try to download $server_file and save to $local_file
 if (ftp_get($conn_id, $local_file, $server_file, FTP_BINARY)) {
     //echo "Successfully written to $local_file\n";
-	echo "ok";
+	echo "ftp";
 }
 else {
     echo "There was a problem\n";
@@ -47,10 +47,14 @@ ftp_close($conn_id);
 
 }
 
-// START
 
-if($WaSet == 'on') { $filename = ""; }
 
+
+
+
+
+// START XML Opdatering
+if($WaSet == 'on') { $filename = ""; } else { $filename = "$rand$filename"; }
 
 $dir = "users/$userL/"; //Hvor skal den lede efter filer?
 $i = 1;
@@ -58,11 +62,11 @@ $directories = array();
 $files_list  = array();
 $files = scandir($dir);
 
-    $i2 = 0; 
-    if ($handle1 = opendir($dir)) {
-        while (($file1 = readdir($handle1)) !== false){
-            if (!in_array($file1, array('.', '..', 'server_check.xml', 'server_control_dreamoc_config.xml', '.DS_Store', '.htaccess', 'description.txt', $filename)) && !is_dir($dir.$file1)) { $i2++; }
-        }
+$i2 = 0;
+if ($handle1 = opendir($dir)) {
+while (($file1 = readdir($handle1)) !== false){
+if (!in_array($file1, array('.', '..', 'server_check.xml', 'server_control_dreamoc_config.xml', 'description.txt', '.DStore', $filename)) && !is_dir($dir.$file1)) { $i2++; }
+}
     }
 	
 $fi = new FilesystemIterator($dir, FilesystemIterator::SKIP_DOTS); // Tæller hvor mange filer (synlige) der er i folderen
@@ -70,7 +74,7 @@ $filesC = iterator_count($fi)-$i2; // Files in folder other than content
 //$i2:  files in folder only content
 
 foreach($files as $file){
-   if(($file != '.') && ($file != '..') && ($file != '._') && ($file != 'server_check.xml') && ($file != 'server_control_dreamoc_config.xml') && ($file != '.DS_Store') && ($file != '.htaccess') && ($file != 'description.txt') && ($file != $filename)){
+   if(($file != '.') && ($file != '..') && ($file != '._') && ($file != 'server_check.xml') && ($file != 'server_control_dreamoc_config.xml') && ($file != 'description.txt') && ($file != '.DStore') && ($file != $filename)){
       if(is_dir($dir.'/'.$file)){
          $directories[]  = $file;
 
@@ -129,22 +133,27 @@ $contentNew = "
 	</file>
 ";
 
-if($count == $i2) { 
-				$header = "<?xml version='1.0' encoding='utf-8' ?>\n<file_status>";
-				$footer = "</file_status>"; 
-					} // Hvis det er sidste loop, så skal den skrive headeren i linje 1
-$content = "$origFile $contentNew";
+//if($file_list === end($files_list)) { 
+if($count == $i2) {
+	$header = "<?xml version='1.0' encoding='utf-8' ?>\n<file_status>";
+	$footer = "</file_status>"; 
+	} 
+	else
+	{
+	$header = "";
+	$footer = ""; 
+	}  // Hvis det er sidste loop, så skal den skrive headeren i linje 1
+$content = "$header $origFile $contentNew $footer";
 
 //Gem det nye tal i tekstfilen
 $fil = fopen("$dir/server_check.xml", "w"); //Åben tekstfilen hvor antallet af hits gemmes i
-fwrite($fil, $header); // Hvis det er sidste loop, så skal den skrive headeren i linje 1
+//fwrite($fil, $header); // Hvis det er sidste loop, så skal den skrive headeren i linje 1
 fwrite($fil, $content); //Skriv content til filen.
-fwrite($fil, $footer); //Hvis det er sidste loop, så slut med at skrive footeren til filen
+//fwrite($fil, $footer); //Hvis det er sidste loop, så slut med at skrive footeren til filen
 fclose($fil); //Luk filen
 }
-echo "xml - ok";
+echo "xml<br>";
 // SLUT
-
 
 }
 }

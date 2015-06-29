@@ -10,15 +10,15 @@ $userL = htmlentities($_SESSION['username']);
 <div align="center" style="width: 500px;">
 <h1>Update sound- and light settings</h1>
 <div style="position:absolute; margin-top: -35px; margin-left: 480px; margin-right: 20px;">
-<a style="margin-left: 15px;" class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=upload">?</a>
+<a style="margin-left: 15px;" class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=servercontrol">?</a>
 <script type="text/javascript">
 		$(document).ready(function() {
 		$("#help").fancybox({
 			maxWidth	: 700,
-			maxHeight	: 500,
+			maxHeight	: 900,
 			fitToView	: false,
-			width		: '70%',
-			height		: '70%',
+			width		: '100%',
+			height		: '75%',
 			autoSize	: false,
 			closeClick	: false,
 			openEffect	: 'none',

@@ -15,7 +15,7 @@ if (login_check($mysqli) == true) : ?>
 		$(document).ready(function() {
 		$("#help").fancybox({
 			maxWidth	: 700,
-			maxHeight	: 500,
+			maxHeight	: 800,
 			fitToView	: false,
 			width		: '70%',
 			height		: '70%',
@@ -194,9 +194,9 @@ fclose($fil); //Luk filen
 	}
 ?>
 </div>
-<?php if(isset($_GET['run']) && !isset($_GET['d'])) { ?>
+<?php //if(isset($_GET['run']) && !isset($_GET['d'])) { ?>
 <div style="clear:both; margin-left: 190px; margin-top: 150px;"><a href="index.php?p=servercontrol" class="btn_blue">Next step</a></div>
-<?php } ?>
+<?php //} ?>
         <?php else : ?>
             <p>
                 <span class="error">You are not authorized to access this page.</span> Please <a href="login.php">login</a>.
