@@ -59,8 +59,12 @@ include_once 'includes/functions.php';
                 </ul>
             </li>
             <li>Your password and confirmation must match exactly</li>
-        </ul>
-        <br><br>
+        </ul> 
+<br>
+<?php
+include('strong-passwords.php');
+?>
+<br><br>
         <form method="post" name="registration_form" action="<?php echo esc_url($_SERVER['PHP_SELF']) . "?success=1&p=" . $_GET['p']; ?>">
             <table width="0" border="0" cellspacing="0" cellpadding="0">
               <tbody>

@@ -74,7 +74,7 @@ if (login_check($mysqli) == false) { echo '<meta http-equiv="refresh" content="0
 		);
 		
 		if(in_array($_SERVER['REMOTE_ADDR'], $whitelist)){
-			echo "<div style='margin-left: 400px; font-size: 28px; color:#3EE83E; position: absolute;'>TEST SERVER <a href='http://customercontent.dreamoc.com/?p=$p' target='_blank'>-></a></div>";
+		echo "<div style='margin-left: 400px; font-size: 28px; color:#3EE83E; position: absolute;'>TEST SERVER <a href='http://customercontent.dreamoc.com/?p=$p' target='_blank'>-></a></div>";
 		}
 		?>
         <div style="float: right; text-align:right;">Logged in as: <?php echo $userL; ?><br><a href="includes/logout.php">log out</a></div>

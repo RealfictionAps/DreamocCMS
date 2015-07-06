@@ -69,19 +69,24 @@ while($row = mysql_fetch_array($result, MYSQL_ASSOC))
 {
 $user_id1 = "{$row['id']}"; // User ID fra members
 }
+	//LAVER BESKYTTELSE AF FILER MED HASH FORAN NAVN PÅ FILER
 	$result2 = mysql_query("SELECT * FROM user_meta WHERE user_id = '$user_id1' LIMIT 1");
 	while($row2 = mysql_fetch_array($result2, MYSQL_ASSOC))
 	{
 	$WaSet = "{$row2['weatherapp']}";
-	if($WaSet == 'off') { 
-		$rand = substr(md5($userL), 0, 8); // Skriver de første 8 tegn af users hash til filen, som kryptering
-		$filename = $rand . "{$row2['filename']}"; } // Look if WeatherApp is set to include
+	$filename = "{$row2['filename']}";
 	}
-
+	$rand = substr(md5($userL), 0, 8); // Skriver de første 8 tegn af users hash til filen, som kryptering
+	if($WaSet == 'on') { $filename = ""; } else { $filename = "$rand$filename"; }
+	
+	//DONT SHOW .nfs-FILES
+	$nfs = glob("$dir" . ".nfs*");
+	$nfs = str_replace($dir, '', $nfs[0]);
+			
     $i2 = 0; 
     if ($handle1 = opendir($dir)) {
         while (($file1 = readdir($handle1)) !== false){
-            if (!in_array($file1, array('.', '..', '._', 'server_check.xml', 'server_control_dreamoc_config.xml', '.DS_Store', '.htaccess', 'description.txt', $filename)) && !is_dir($dir.$file1)) { $i2++; }
+        if (!in_array($file1, array('.', '..', '._', 'server_check.xml', 'server_control_dreamoc_config.xml', '.DS_Store', '.htaccess', 'description.txt', $filename, $nfs)) && !is_dir($dir.$file1)) { $i2++; }
         }
     }
 	
@@ -90,7 +95,7 @@ $filesC = iterator_count($fi)-$i2; // Files in folder other than content
 //$i2:  files in folder only content
 
 foreach($files as $file){
-   if(($file != '.') && ($file != '..') && ($file != '._') && ($file != 'server_check.xml') && ($file != 'server_control_dreamoc_config.xml') && ($file != '.DS_Store') && ($file != '.htaccess') && ($file != 'description.txt') && ($file != $filename)){
+   if(($file != '.') && ($file != '..') && ($file != '._') && ($file != 'server_check.xml') && ($file != 'server_control_dreamoc_config.xml') && ($file != '.DS_Store') && ($file != '.htaccess') && ($file != 'description.txt') && ($file != $filename) && ($file != $nfs)){
       if(is_dir($dir.'/'.$file)){
          $directories[]  = $file;
 

@@ -1,5 +1,5 @@
 <div align="center" style="width: 600px;">
-<h1 style="margin-left: -50px;">Dreamoc SD Configurator</h1>
+<h1 style="margin-left: -50px;">Dreamoc SD-key Configurator</h1>
 <div style="position:absolute; margin-top: -35px; margin-left: 470px;">
 <a style="margin-left: 10px;" class="btn_blue" id="help" data-fancybox-type="iframe" href="help.php?p=hd3conf">?</a>
 <script type="text/javascript">

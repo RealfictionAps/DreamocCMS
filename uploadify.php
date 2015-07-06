@@ -10,7 +10,7 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
 	$targetFile = rtrim($targetPath,'/') . '/' . $rand . $_FILES['Filedata']['name'];
 	
 	// Validate the file type
-	$fileTypes = array('jpg','jpeg','gif','png','mov','MOV','mp4','MP4','AVI','WMV','wmv'); // File extensions
+	$fileTypes = array('jpg','jpeg','gif','png','mov','MOV','mp4','mpg','MPG','MP4','AVI','WMV','wmv'); // File extensions
 	$fileParts = pathinfo($_FILES['Filedata']['name']);
 	
 	if (in_array($fileParts['extension'],$fileTypes)) {

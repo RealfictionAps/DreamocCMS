@@ -54,18 +54,24 @@ ftp_close($conn_id);
 
 
 // START XML Opdatering
-if($WaSet == 'on') { $filename = ""; } else { $filename = "$rand$filename"; }
-
 $dir = "users/$userL/"; //Hvor skal den lede efter filer?
 $i = 1;
 $directories = array();
 $files_list  = array();
 $files = scandir($dir);
 
+// CHECK IF WEATHERAPP IS ON
+	if($WaSet == 'on') { $filename = ""; } else { $filename = "$rand$filename"; }
+
+//DONT SHOW .nfs-FILES
+	$nfs = glob("$dir" . ".nfs*");
+	$nfs = str_replace($dir, '', $nfs[0]);
+
+
 $i2 = 0;
 if ($handle1 = opendir($dir)) {
 while (($file1 = readdir($handle1)) !== false){
-if (!in_array($file1, array('.', '..', 'server_check.xml', 'server_control_dreamoc_config.xml', 'description.txt', '.DStore', $filename)) && !is_dir($dir.$file1)) { $i2++; }
+if (!in_array($file1, array('.', '..', 'server_check.xml', 'server_control_dreamoc_config.xml', '.htaccess', 'description.txt', '.DS_Store', $filename, $nfs)) && !is_dir($dir.$file1)) { $i2++; }
 }
     }
 	
@@ -74,7 +80,7 @@ $filesC = iterator_count($fi)-$i2; // Files in folder other than content
 //$i2:  files in folder only content
 
 foreach($files as $file){
-   if(($file != '.') && ($file != '..') && ($file != '._') && ($file != 'server_check.xml') && ($file != 'server_control_dreamoc_config.xml') && ($file != 'description.txt') && ($file != '.DStore') && ($file != $filename)){
+   if(($file != '.') && ($file != '..') && ($file != '._') && ($file != 'server_check.xml') && ($file != 'server_control_dreamoc_config.xml') && ($file != '.htaccess') && ($file != 'description.txt') && ($file != '.DS_Store') && ($file != $filename) && ($file != $nfs)){
       if(is_dir($dir.'/'.$file)){
          $directories[]  = $file;
 
@@ -133,8 +139,8 @@ $contentNew = "
 	</file>
 ";
 
-//if($file_list === end($files_list)) { 
-if($count == $i2) {
+if($file_list === end($files_list)) { 
+//if($count == $i2) {
 	$header = "<?xml version='1.0' encoding='utf-8' ?>\n<file_status>";
 	$footer = "</file_status>"; 
 	} 

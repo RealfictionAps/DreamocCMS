@@ -155,7 +155,7 @@ function tz_list() {
 	
 	
 	<div class="block" style="width:300px; margin-bottom:70px;">
-		<input class="btn_green" style="float:right;" value="Compose for SD Card" type="submit" name="submit" id="Send">
+		<input class="btn_green" style="float:right;" value="Compose key for SD Card" type="submit" name="submit" id="Send">
 	</div>
 </form>
 

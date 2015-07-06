@@ -11,7 +11,10 @@ body {
 </head>
 
 <body>
-<?php if($_GET['p'] == "upload") { ?>
+<?php
+$helppage = $_GET['p'];
+?>
+<?php if($helppage == 'test' || $helppage == "upload") { ?>
 <h1 style="text-align: center">Get started </h1>
 <ol>
   <li>The first step is the chose the videos, you want to upload to your Dreamoc(s).</li>
@@ -27,7 +30,7 @@ body {
 <div align="center">If you still are in doubt, please <a href="mailto:support@realfiction.com">contact us here</a>.</div>
 <?php } ?>
 
-<?php if($_GET['p'] == "servercontrol") { ?>
+<?php if($helppage == 'test' || $helppage == "servercontrol") { ?>
 <h1 style="text-align: center">Sound- and light settings</h1>
 The sound- and light settings gives you the opportunities to control how loud the dreamoc speakers should play and how much artificial light the LED in the Dreamoc should apply.
 <ol>
@@ -43,8 +46,8 @@ The sound- and light settings gives you the opportunities to control how loud th
 <div align="center">If you still are in doubt, please <a href="mailto:support@realfiction.com">contact us here</a>.</div>
 <?php } ?>
 
-<?php if($_GET['p'] == "hd3conf") { ?>
-<h1 style="text-align: center">Dreamoc SD Configurator</h1>
+<?php if($helppage == 'test' || $helppage == "hd3conf") { ?>
+<h1 style="text-align: center">Dreamoc SD-key Configurator</h1>
 The Dreamoc SD Configurator, lets you easily create the config-file, that connects your Dreamoc(s) to your Dreamoc CMS server. Without this file, your Dreamoc can’t read the content, that you have uploaded here.<br>
 <ol>
   <li>The first very important step is to tell your Dreamoc(s) where they are located, so the time is correct. You do that by choosing the City in the select menu under “1. Choose Dreamoc Location”.</li>
@@ -62,12 +65,15 @@ The Dreamoc SD Configurator, lets you easily create the config-file, that connec
   <iframe src="https://player.vimeo.com/video/132087462" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 </div>
 <h3>Different locations</h3>
-<p>If you have Dreamocs located in different timezones, you can create an individual config-file for every different location. Just make sure that on the SD card, they are all named exactly “config.xml”.<br>
+<p>If you have Dreamocs located in different timezones, you can create an individual config-file for every different location. Just make sure that on the SD card, they are all named exactly “config.xml”.</p>
+<h3>Working on a Mac</h3>
+<p>It can be a good idea to erase your SD card before copying  the config-file onto it.  Macintosh systems sometimes seems to create hidden trash files on inserted Volumes, that conflicts with the Dreamoc. Do complete delete, chosing filesystem FAT32, and copy the config-file afterwoods. Remember to eject the SD card correctly.</p>
+<p><br>
 </p>
 <div align="center">If you still are in doubt, please <a href="mailto:support@realfiction.com">contact us here</a>.</div>
 <?php } ?>
 
-<?php if($_GET['p'] == "weatherapp") { ?>
+<?php if($helppage == 'test' || $helppage == "weatherapp") { ?>
 <h1 style="text-align: center">WeatherApp integration</h1>
 <p>The WeatherApp is a great way to make your Dreamoc(s) come to life. By presenting local up-to-date weather forecasts, your Dreamoc content is always relevant. In order to make it work with the Dreamoc CMS, you need to create an account here (http://shop.realfiction.com/index.php/weather-app-1.html). </p>
 <ol>
