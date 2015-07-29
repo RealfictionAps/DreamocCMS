@@ -128,7 +128,7 @@ if(isset($_POST['desc'])) {
         <li><a href="?p=hd3conf" <?php if($p == 'hd3conf') { echo 'id="document"'; } ?> title="Download configuration file"><span class="fontawesome-magnet"></span></a></li>
         <li><a href="?p=weatherapp" <?php if($p == 'weatherapp') { echo 'id="document"'; } ?> title="Weather App"><span class="fontawesome-cloud"></span></a></li>
         <li><a href="?p=legal" <?php if($p == 'legal') { echo 'id="document"'; } ?> title="Legal info"><span class="fontawesome-legal"></span></a></li>
-      <?php if($userL == $adminUL) { ?><li><a href="?p=register" <?php if($p == 'user') { echo 'id="document"'; } ?> title="Info"><span class="fontawesome-user"></span></a></li><?php } ?>
+      <?php if($userL == $adminUL) { ?><li><a href="?p=register" <?php if($p == 'register') { echo 'id="document"'; } ?> title="Info"><span class="fontawesome-user"></span></a></li><?php } ?>
       </ul>
     </div>
             <div style="position:absolute; margin-bottom: 10px;	bottom:0; margin-left: 0px; margin-right: 5px; color:#fff; font-size:10px;";>

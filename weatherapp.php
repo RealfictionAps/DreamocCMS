@@ -62,11 +62,63 @@ $user_id1 = "{$row['id']}"; // User ID fra members
 	$WaSet = "{$row2['weatherapp']}";
 	$DBusername = "{$row2['username']}";
 	$DBpassword = "{$row2['password']}";
-	$filename = "{$row2['filename']}"; 
+	$DBfilename = "{$row2['filename']}"; 
+	}
+?>
+<?php
+if(!empty($_POST)) { // Hvis der er indsendt weather app
+	$username = $_POST['username'];
+	$password = $_POST['password'];
+	$POST_toggleWA = $_POST['toggleWA'];
+	$filename = $_POST['filename'];
+
+// ######## TJEKKER OM DER ER FORBINDELSE - KOPIERER FILEN, HVIS DER ER. ##########
+$ftp_server="data.seenspire.com";
+$rand = substr(md5($userL), 0, 8); // Skriver de første 8 tegn af users hash til filen, som kryptering
+$local_file = "users/$userL/$rand$filename";
+$conn_id = ftp_connect($ftp_server);
+// login with username and password
+$login_result = ftp_login($conn_id, $username, $password);
+// try to download $server_file and save to $local_file
+
+if($POST_toggleWA == 'on') {
+if (ftp_get($conn_id, $local_file, $filename, FTP_BINARY)) {
+    //echo "Successfully written to $local_file\n";
+	$toggleWA = "on";
+	$msg = "msg1"; // OK + ON
+}
+else {
+    $toggleWA = "off";
+	$msg .= "msg2"; // Wrong
+}
+}
+else {
+	if(ftp_login(ftp_connect($ftp_server), $username, $password)) {
+	$toggleWA = "off";
+	$msg = "msg3"; // Correct, but off
+}
+	else {
+	$toggleWA = "off";
+	$msg = "msg4"; // Wrong + OFF
+}
+}
+// close the connection
+ftp_close($conn_id);
+		
+		
+if($user_id == '') {
+	mysql_query("INSERT INTO user_meta (user_id, weatherapp, filename, username, password) VALUES('$user_id1', '$toggleWA', '$filename', '$username', '$password' ) ") 
+	or die(mysql_error());
+	}
+else {
+	mysql_query("UPDATE user_meta SET weatherapp = '$toggleWA', filename = '$filename', username = '$username', password = '$password' WHERE user_id = '$user_id1' ") 
+	or die(mysql_error());
+}
+		echo '<meta http-equiv="refresh" content="0; url=index.php?p=weatherapp&updated=1&msg=' . $msg . '">';
 	}
 ?>
 
-<?php if(isset($_GET['pre']) && $_GET['wahide'] != 1 || $filename == '' && $_GET['wahide'] != 1) { ?>
+<?php if(isset($_GET['pre']) && $_GET['wahide'] != 1 || $DBfilename == '' && $_GET['wahide'] != 1) { ?>
 <iframe src="https://player.vimeo.com/video/111204051?autoplay=1&color=ffffff&title=0&byline=0&portrait=0" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/111204051">Weather App - 3D weather forecast for Dreamoc</a> from <a href="https://vimeo.com/user7628333">RealFiction.com</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 <div style=" position:absolute; margin-top: -330px; margin-left: 470px;"><a href="?p=weatherapp&wahide=1" class="btn_red">X</a></div>
 <br>
@@ -96,7 +148,7 @@ $user_id1 = "{$row['id']}"; // User ID fra members
                   </tr>
                   <tr>
                     <td>Filename:</td>
-                    <td><input name="filename" type="text" placeholder="Fx HD3_Villa Hills.mp4" value="<?php echo "$filename"; ?>" size="30" ></td>
+                    <td><input name="filename" type="text" placeholder="Fx HD3_Villa Hills.mp4" value="<?php echo "$DBfilename"; ?>" size="30" ></td>
                   </tr>
                 </tbody>
               </table>
@@ -105,34 +157,21 @@ $user_id1 = "{$row['id']}"; // User ID fra members
       <?php if(isset($_GET['updated'])) { ?>
     </p>
     
-    <div align='center' style="color:green; padding-top: 10px; font-weight: bold;">-- DONE. --<br>
-    It can cate up to 10 minutes until your Dreamoc is updated.<br>
-    Remember to switch &quot;Enable WeatherApp&quot; ON, above.</div>
+    <div align='center' style="color:green; padding-top: 10px; font-weight: bold;">-- DONE --<br>
+    <?php
+	if($_GET['msg'] == 'msg1') {
+		echo "Great! You are connected and WeatherApp is Running."; }
+	if($_GET['msg'] == 'msg2') {
+		echo "Your login is not matching or your filename is wrong. Try another login / filename."; }
+	if($_GET['msg'] == 'msg3') {
+		echo "Your login is correct, but WeatherApp is set to off."; }
+	if($_GET['msg'] == 'msg4') {
+		echo "Your login is not matching. WeatherApp is therefore off."; }
+		?>
+	</div>
 	<?php } ?>
 </form>
 </div>
-
-<?php
-	if(!empty($_POST)) { // Hvis der er indsendt weather app
-
-		
-		$username = $_POST['username'];
-		$password = $_POST['password'];
-		$toggleWA = $_POST['toggleWA'];
-		$filename = $_POST['filename'];
-		if($toggleWA == 'on') { $toggleWA = "on"; } else { $toggleWA = "off"; }
-		
-if($user_id == '') {
-	mysql_query("INSERT INTO user_meta (user_id, weatherapp, filename, username, password) VALUES('$user_id1', '$toggleWA', '$filename', '$username', '$password' ) ") 
-	or die(mysql_error());
-	}
-else {
-	mysql_query("UPDATE user_meta SET weatherapp = '$toggleWA', filename = '$filename', username = '$username', password = '$password' WHERE user_id = '$user_id1' ") 
-	or die(mysql_error());
-}
-		echo '<meta http-equiv="refresh" content="0; url=index.php?p=weatherapp&updated=1">';
-	}
-?>
         <?php else : ?>
             <p>
                 <span class="error">You are not authorized to access this page.</span> Please <a href="login.php">login</a>.
