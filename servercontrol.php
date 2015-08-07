@@ -192,10 +192,14 @@ margin-bottom: -20px;
 <input name="conf" type="submit" class="btn_green" value="Update">
 </form>
 <?php if(isset($_GET['updated'])) { // vis DONE, hvis der er klikket update 
-if($spotlightOptions == 'checked' && $resetControl == 'checked') { $msg = "Light Control er slået til. Husk 1kHz lyd skal konfigureres i dine uploadede content filer."; }
-if($resetControl == '') { $msg = "Dreamoc CMS light- & sound settings are turned off. Your local Dreamocs will control the light & sound local and individiually."; }
+if($spotlightOptions == 'checked' && $resetControl == 'checked') { 
+	$msg = "Light Control is ON. Remember that a 1kHz sound should be configured in your uploaded content in order to make it work."; 
+}
+if($resetControl == '') {
+	$msg = "Dreamoc CMS light- & sound settings are turned off. Your local Dreamocs will control the light & sound local and individiually.";
+}
 ?>
-    <div align='center' style="color:green; padding-top: 10px; font-weight: bold;">Updated!</div>
+    <div id="saved" align='center' style="color:green; padding-top: 10px; font-weight: bold;">Saved! - Changes will take effect on next local Dreamoc update.</div>
     <div align='center' style="color: #9D9D9D; margin-top: -10px;"><?php echo "<br>" . $msg; ?></div>
 <?php } ?>
     <div style="padding-top: 20px;"><a href="index.php?p=hd3conf" class="btn_blue">Next step</a></div>
@@ -232,7 +236,7 @@ if($resetControl == '') { $msg = "Dreamoc CMS light- & sound settings are turned
 		fwrite($fil, $content); //Skriv content til filen.
 		fclose($fil); //Luk filen
 		
-		echo '<meta http-equiv="refresh" content="0; url=index.php?p=servercontrol&updated=1">';
+		echo '<meta http-equiv="refresh" content="0; url=index.php?p=servercontrol&updated=1#saved">';
 		//echo "$flipSC - $flipSO || $sliderSound - $sliderLight";
 	}
 ?>
