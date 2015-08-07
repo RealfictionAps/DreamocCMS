@@ -157,10 +157,10 @@ else {
       <?php if(isset($_GET['updated'])) { ?>
     </p>
     
-    <div align='center' style="color:green; padding-top: 10px; font-weight: bold;">-- DONE --<br>
+    <div align='center' style="color:green; padding-top: 10px; font-weight: bold;">
     <?php
 	if($_GET['msg'] == 'msg1') {
-		echo "Great! You are connected and WeatherApp is Running."; }
+		echo "Great! You are connected and WeatherApp is Running.<br>It can take up to 10 minutes before the server have downloaded the file."; }
 	if($_GET['msg'] == 'msg2') {
 		echo "Your login is not matching or your filename is wrong. Try another login / filename."; }
 	if($_GET['msg'] == 'msg3') {

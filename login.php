@@ -15,6 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+if($_SERVER['SERVER_NAME'] != "http://cms.dreamoc.com" && $_SERVER['SERVER_NAME'] != "localhost") { 
+header('location: http://cms.dreamoc.com/'); 
+}
+
 include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
 

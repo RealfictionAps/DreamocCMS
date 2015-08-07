@@ -34,7 +34,7 @@ $userL = htmlentities($_SESSION['username']);
 					'uploader' : 'uploadify.php',
 					'onUploadSuccess' : function(file, data, response) { 
 					setTimeout(function(){
-					window.location.href = 'index.php?run=y';
+					window.location.href = 'index.php?run=y&rs=' + data;
 					}, 1500); 
 					}
 			});

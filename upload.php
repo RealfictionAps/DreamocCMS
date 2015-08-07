@@ -43,9 +43,15 @@ if (login_check($mysqli) == true) : ?>
 
 
 <div style="clear:both;"></div>
-<?php if(isset($_GET['run'])) { 
-echo "<div style='color:green; padding-top: -10px; padding-bottom: 15px; font-weight: bold; margin-right: 200px;'>Your Dreamocs are updated</div>"; 
-} ?>
+<div style="margin-top: -10px; margin-bottom: 10px; font-weight: bold; margin-right: 200px; font-size: 10px;">Max 100 MB files.</div>
+<?php 
+if(isset($_GET['run'])) { 
+echo "<div style='color:green; padding-top: -10px; padding-bottom: 15px; font-weight: bold; margin-right: 200px;'>Your Dreamoc playlist is updated.</div>"; 
+}
+if(isset($_GET['run']) && isset($_GET['rs']) && $_GET['rs'] != '1') { 
+echo "<div style='color:red; padding-top: -10px; padding-bottom: 15px; font-weight: bold; margin-right: 200px;'>Sorry, you have uploaded an unvalid file.</div>"; 
+} 
+?>
 
       <div style="float:left; font-weight: bold; margin-bottom: 20px;">
       Content list:

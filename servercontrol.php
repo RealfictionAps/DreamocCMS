@@ -79,30 +79,44 @@ $(document).ready(function(){
     }
 })
 </script>
+<style>
+.gradient {
+border-top: thin solid #F0F0F0;
+height: 50px;
+margin-bottom: -20px;
+}
+</style>
 <form id="soundLight" name="soundLight" method="post" action="index.php?p=servercontrol">
 <div class="wrap">
 <!-- how to hide: http://jsfiddle.net/sowdri/8vbyD/5/ -->
 
-              Enable&nbsp;&nbsp;&nbsp;<span title2="This enables / disables the system control of the dreamoc's sound - and light settings. If it is off, all settings are ruled by the physical dreamoc settings." id="tooltip" class="tooltip">?</span><br><br>
+              <div style="margin-left: -220px;">What should control light and sound&nbsp;&nbsp;&nbsp;<span title2="This enables / disables the system control of the dreamoc's sound - and light settings. If it is off, all settings are ruled by the physical dreamoc settings." id="tooltip" class="tooltip">?</span></div>
+              <div style="margin-top: 10px;">
               <input type="checkbox" class="slider-v3" id="flipSC" name="flipSC" <?php echo $resetControl; ?> onclick="showMe('div1')" />
               <label for="flipSC"></label>
-              <div style=" margin-left: 165px; margin-top: -27px; position:absolute; color:#9E9E9E;">Off</div>
-              <div style=" margin-left: 315px; margin-top: -27px; position:absolute; color:#9E9E9E;">On</div>
-<br><br>
-        <div id="div1" style="display: <?php if($resetControl == 'checked') { echo "block"; } else { echo "none"; } ?>;">
-        <label>Sound volume</label>
+                  <div style=" margin-left: 88px; margin-top: -27px; position:absolute; color:#9E9E9E;">Local Dreamoc</div>
+                  <div style=" margin-left: 315px; margin-top: -27px; position:absolute; color:#9E9E9E;">Dreamoc CMS</div>
+              </div>
+                  <div id="div1" style="margin-top: 20px; display: <?php if($resetControl == 'checked') { echo "block"; } else { echo "none"; } ?>;">
+        <div class="gradient"></div>
+        <div style="margin-left: -353px; margin-bottom: 20px;">
+        <label>Sound volume&nbsp;&nbsp;&nbsp;<span title2="Set the universal sound volume of all the movies being played on your Dreamocs." id="tooltip" class="tooltip">?</span></label></div>
         <input type="text" id="range" value="<?php echo $volume_value; ?>" name="sliderSound" />
-<br><br><br><br>
-              Light control&nbsp;&nbsp;&nbsp;<span title2="Here you can set the spotligt level of your Dreamoc. If it's on manual, the slider below decides the light level. If it's on Auto, the right speaker (1kHz) volume decides the light level." class="tooltip">?</span><br><br>
-              <input type="checkbox" class="slider-v3" id="flipSO" name="flipSO" <?php echo $spotlightOptions; ?> onclick="showMeLight('div2')" />
-              <label for="flipSO"></label>
-              <div style=" margin-left: 140px; margin-top: -27px; position:absolute; color:#9E9E9E;">Manual</div>
-              <div style=" margin-left: 315px; margin-top: -27px; position:absolute; color:#9E9E9E;">Auto</div>
-<br><br><br>
-        <div id="div2" style="display: <?php if($spotlightOptions == '') { echo "block"; } else { echo "none"; } ?>;">
-        <label>Manual light level</label>
+
+        
+        <div id="div2" style="margin-top: 35px; display: <?php if($spotlightOptions == '') { echo "block"; } else { echo "none"; } ?>;">
+        <div style="margin-left: -380px; margin-bottom: 20px;">
+        <label>Light level&nbsp;&nbsp;&nbsp;<span title2="Set the universal Light level of all the movies being played on your Dreamocs." id="tooltip" class="tooltip">?</span></label></div>
         <input type="text" id="range2" value="<?php echo $manual_step; ?>" name="sliderLight" />
         </div>
+        
+        <div style="margin-top: 40px;" class="gradient"></div>
+        <div style="margin-left: -270px; margin-bottom: 20px;">
+              Enable Light control feature&nbsp;&nbsp;&nbsp;<span title2="The Light Control feature will, if it's enabled, let a 1kHz volume tone, decide the light level. Fx it can be used with 'Light bulp' toturial." class="tooltip">?</span></div>
+              <input type="checkbox" class="slider-v3" id="flipSO" name="flipSO" <?php echo $spotlightOptions; ?> onclick="showMeLight('div2')" />
+              <label for="flipSO"></label>
+              <div style=" margin-left: 140px; margin-top: -27px; position:absolute; color:#9E9E9E;">Disable</div>
+              <div style=" margin-left: 315px; margin-top: -27px; position:absolute; color:#9E9E9E;">Enable</div>
 </div>    
 </div>
 <div style="padding-bottom: 50px;">
@@ -174,11 +188,15 @@ $(document).ready(function(){
     });
 </script> 
 </div>
-
+<div style="margin-top: -30px;" class="gradient"></div>
 <input name="conf" type="submit" class="btn_green" value="Update">
 </form>
-<?php if(isset($_GET['updated'])) { // vis DONE, hvis der er klikket update ?>
-    <div align='center' style="color:green; padding-top: 10px; font-weight: bold;">-- DONE --</div>
+<?php if(isset($_GET['updated'])) { // vis DONE, hvis der er klikket update 
+if($spotlightOptions == 'checked' && $resetControl == 'checked') { $msg = "Light Control er slået til. Husk 1kHz lyd skal konfigureres i dine uploadede content filer."; }
+if($resetControl == '') { $msg = "Dreamoc CMS light- & sound settings are turned off. Your local Dreamocs will control the light & sound local and individiually."; }
+?>
+    <div align='center' style="color:green; padding-top: 10px; font-weight: bold;">Updated!</div>
+    <div align='center' style="color: #9D9D9D; margin-top: -10px;"><?php echo "<br>" . $msg; ?></div>
 <?php } ?>
     <div style="padding-top: 20px;"><a href="index.php?p=hd3conf" class="btn_blue">Next step</a></div>
 </div>
