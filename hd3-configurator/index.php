@@ -33,7 +33,7 @@ function tz_list() {
     <option value="0">Please, select timezone</option>
     <?php foreach(tz_list() as $t) { ?>
       <option <?php if("Europe/Berlin" == $t['zone']) { echo "selected"; } ?> value="<?php $val = str_replace("UTC/GMT ", "", $t['diff_from_GMT']); echo $val;  ?>">
-        <?php print $t['zone'] . ' - ' . $t['diff_from_GMT']; ?>
+        <?php print $t['diff_from_GMT'] . ' - ' . $t['zone'] ?>
       </option>
     <?php } ?>
   </select>
@@ -42,7 +42,7 @@ function tz_list() {
 
    <div style="margin-left: -10px; margin-bottom: 10px; margin-top: 40px; color:#606060;">2: Timer setting</div>
    	<div class="block">
-		<label>Update Dreamoc on power up:</label>
+		<label>Update content on power up:</label>
 		<input name="auto_boot" size="30" type="radio"  checked="checked" value="on" ><span>ON</span>
 		<input name="auto_boot" size="30" type="radio" value="off"  id="dhcp_set"><span>OFF</span>
 		<span title='Auto Boot lets you decide if the content should be updated when you turn on your Dreamoc (ON), or if it should only update content on a specific time (OFF).' class="masterTooltip">?</span>
@@ -58,7 +58,7 @@ function tz_list() {
 
 	<div class="block">
 		<input type="hidden" name="auto_time" value="on">
-        <label>Daily Dreamoc update time:</label>
+        <label>Daily content update time:</label>
 		hh: <select name="auto_time_value_hh">
         <?php
 			for ($i = 0; $i <= 23; $i++) {
@@ -113,7 +113,7 @@ function tz_list() {
 	</div>
 	
 	<div class="block">
-		<label>Dreamoc power ON time:</label>
+		<label>Dreamoc power on time:</label>
         hh: <select name="poweron_time_hh" id="poweron_time1" disabled>
         <?php
 			for ($i = 0; $i <= 23; $i++) {
@@ -133,7 +133,7 @@ function tz_list() {
 		<span title='The specific time a day, where the Dreamoc should power ON. Range can be set from 00:00:00 to 23:59:59 (hh:mm:ss).' class="masterTooltip">?</span>
 	</div>	
 	<div class="block">
-		<label>Dreamoc power OFF time:</label>
+		<label>Dreamoc power off time:</label>
          hh: <select name="poweroff_time_hh" id="poweroff_time1" disabled>
         <?php
 			for ($i = 0; $i <= 23; $i++) {

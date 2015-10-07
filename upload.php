@@ -140,8 +140,8 @@ foreach($files_list as $file_list){
 
 			$(document).ready(function() {
 			$(".video-<? echo $count; ?>").fancybox({
-				maxWidth	: 710,
-				maxHeight	: 800,
+				maxWidth	: 680,
+				maxHeight	: 390,
 				fitToView	: false,
 				width		: '100%',
 				height		: '500px',

@@ -78,7 +78,8 @@ include('strong-passwords.php');
                 </tr>
                 <tr>
                   <td height="45" align="left" valign="top">Server:</td>
-                  <td align="left" valign="top"><input type="text" name="serverpass" id="serverpass" /></td>
+                  <td align="left" valign="top"><input type="text" name="serverpass" id="serverpass" />
+                  Only for FTP setup</td>
                 </tr>
                 <tr>
                   <td height="27" align="left" valign="top">Password:</td>

@@ -68,9 +68,9 @@ if(isset($_POST['submit'])){
 	 //}
 	 
 	 if($_POST['protocol_url']!=''){
-	   $protocol_url = 'customercontent.dreamoc.com';
+	   $protocol_url = 'cms.dreamoc.com';
 	 }else{
-	   $protocol_url='customercontent.dreamoc.com';
+	   $protocol_url='cms.dreamoc.com';
 	 }
 	 /*if($_POST['protocol_port']!=''){
 	   $protocol_port = '21';
