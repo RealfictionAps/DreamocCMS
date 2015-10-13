@@ -66,7 +66,7 @@ $user_id1 = "{$row['id']}"; // User ID fra members
 	}
 ?>
 <?php
-if(!empty($_POST)) { // Hvis der er indsendt weather app
+if(!empty($_POST) && !isset($_POST['desc']) ) { // Hvis der er indsendt weather app
 	$username = $_POST['username'];
 	$password = $_POST['password'];
 	$POST_toggleWA = $_POST['toggleWA'];
