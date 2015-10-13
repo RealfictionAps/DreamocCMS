@@ -1,4 +1,7 @@
 <?php
+// #### TRACK
+include_once 'includes/analytics.php';
+
 /**
  * Mobile Detect Library
  * =====================

@@ -12,6 +12,8 @@ body {
 
 <body>
 <?php
+include_once 'includes/analytics.php';
+
 $helppage = $_GET['p'];
 ?>
 <?php if($helppage == 'test' || $helppage == "upload") { ?>

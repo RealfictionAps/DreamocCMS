@@ -7,6 +7,7 @@
 </head>
 
 <body>
+<?php include_once '../includes/analytics.php'; ?>
 <div align="center" style="padding-top: 20px; padding-bottom: 50px; margin: 0px 60px 0px 60px">
   <p>
   <div style="font-size: 24px; font-weight: bold; margin-bottom: 20px;">Great! You are almost done.</div>

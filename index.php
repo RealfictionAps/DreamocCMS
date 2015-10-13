@@ -1,8 +1,9 @@
 <?php
 include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
-
 sec_session_start();
+
+include_once 'includes/analytics.php';
 
 // PAGE SELECT
 $p = $_GET['p'];

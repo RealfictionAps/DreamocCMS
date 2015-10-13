@@ -1,5 +1,8 @@
 
 <?php
+// #### Track
+include_once 'includes/analytics.php';
+
 // #### Connect to MySql
 include_once 'includes/psl-config.php';
 mysql_connect(HOST, USER, PASSWORD) or die(mysql_error());
