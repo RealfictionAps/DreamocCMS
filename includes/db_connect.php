@@ -18,6 +18,7 @@
  */
 $dir = "users"; //directory of users folders
 $adminUL = "emil2"; //admin user
+$liveURL = "cms.dreamoc.com";
 
 include_once 'psl-config.php';   // Needed because functions.php is not included
 
