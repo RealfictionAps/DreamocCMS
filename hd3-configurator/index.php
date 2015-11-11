@@ -32,7 +32,23 @@ function tz_list() {
   <select name="ntp_timezone" id="ntp_timezone" style="font-family: 'Courier New', Courier, monospace; width: 430px;">
     <option value="0">Please, select timezone</option>
     <?php foreach(tz_list() as $t) { ?>
-      <option <?php if("Europe/Berlin" == $t['zone']) { echo "selected"; } ?> value="<?php $val = str_replace("UTC/GMT ", "", $t['diff_from_GMT']); echo $val;  ?>">
+      <?php
+    if($AutofindLocation == 'on') {
+		require_once('geoplugin.class/geoplugin.class.php');
+		$geoplugin = new geoPlugin();
+		$geoplugin->locate();
+	
+		$continent_short = "{$geoplugin->continentCode}";
+		$healthy = array("EU", "AU", "US");
+		$yummy   = array("Europe", "Australia", "America");
+		$continent = str_replace($healthy, $yummy, $continent_short);
+		$place = "$continent/{$geoplugin->city}";
+	}
+	if($AutofindLocation == 'off' || 0 === strpos($place, '/')) {
+		$place = $defaultLocation;
+	}
+?>
+      <option <?php if("$place" == $t['zone']) { echo "selected"; } ?> value="<?php $val = str_replace("UTC/GMT ", "", $t['diff_from_GMT']); echo $val;  ?>">
         <?php print $t['diff_from_GMT'] . ' - ' . $t['zone'] ?>
       </option>
     <?php } ?>
