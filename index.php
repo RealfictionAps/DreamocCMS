@@ -10,6 +10,17 @@ $p = $_GET['p'];
 if($p == '') { $p = "upload"; }
 $userL = htmlentities($_SESSION['username']);
 ?>
+<?php
+include_once 'includes/psl-config.php';
+mysql_connect(HOST, USER, PASSWORD) or die(mysql_error());
+mysql_select_db(DATABASE) or die(mysql_error());
+
+$result = mysql_query("SELECT * FROM members WHERE username = '$userL' AND admin = 'yes'");
+while($row = mysql_fetch_array($result, MYSQL_ASSOC))
+	{
+$adminUL = $row['username']; //This user is admin?
+	}
+?>
 <!DOCTYPE HTML>
 <html>
 <head>

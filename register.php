@@ -107,10 +107,65 @@ include('strong-passwords.php');
             </table>
     </form>
 <hr>
-<br>
-Tools
-        <p><a href="./cron.php" target="_blank">Run cronjob</a></p>
-    </body>
+<p><br>
+  Tools:</p>
+<?php if($userL != 'test_user') { echo "<p><a href='#?deltu=y'>Delete test_user</a></p>"; } if($userL == 'test_user') { echo "<p><k class='fontawesome-flag' style='color: red;'></k> PLEASE CREATE AN ACCOUNT AND MAKE THE ACCOUNT ADMIN. LOG OUT AND IN WITH THE NEW ACCOUNT AND HERE, CLICK: DELETE TEST_USER</p>"; }
+if(isset($_GET['deltu'])) {
+	$sql = "DELETE FROM members WHERE username='test_user'";
+	echo "<div style='color:red;'>User was deleted!</div>";
+}
+?>
+<p><a href="./cron.php" target="_blank">Run cronjob</a> (Set it to run every 5 minutes)</p>
+
+<table width="500" border="0">
+  <tbody>
+    <tr>
+      <td><strong>Username</strong></td>
+      <td><strong>admin</strong></td>
+      <td><strong>tools</strong></td>
+    </tr>
+<p></p>
+<?php
+$result = mysql_query("SELECT * FROM members");
+while($row = mysql_fetch_array($result, MYSQL_ASSOC))
+	{
+echo "
+<tr>
+      <td>{$row['username']}</td>
+      <td>{$row['admin']}</td>
+	  <td><a href='?p=$p&delU=y&id={$row['id']}'>delete</a> - <a href='?p=$p&Madm=y&id={$row['id']}'>Toggle admin</a></td>
+    </tr>"; //This user is admin?
+	}
+?>
+  </tbody>
+</table>
+<?php
+include_once 'includes/psl-config.php';
+mysql_connect(HOST, USER, PASSWORD) or die(mysql_error());
+mysql_select_db(DATABASE) or die(mysql_error());
+
+if(isset($_GET['delU'])) { // Delete user
+	$id = $_GET['id'];
+	mysql_query("DELETE FROM members WHERE id='$id' ")
+	or die(mysql_error());
+	echo "<br>Udført";
+	echo "<meta http-equiv='refresh' content='0;url=?p=$p' />";
+}
+if(isset($_GET['Madm'])) { // Make admin
+	$id = $_GET['id'];
+	$result = mysql_query("SELECT * FROM members WHERE id = '$id' ");
+while($row = mysql_fetch_array($result, MYSQL_ASSOC))
+	{ $alreadyAdmin = $row['admin']; }
+	
+	if($alreadyAdmin == 'yes') { $upd = ''; } else { $upd = 'yes'; }
+	
+	mysql_query("UPDATE members SET admin = '$upd' WHERE id = '$id' ") 
+	or die(mysql_error());
+	echo "<br>Udført";
+	echo "<meta http-equiv='refresh' content='0;url=?p=$p' />";
+}
+?>
+</body>
 </html>
         <?php else : ?>
             <p>

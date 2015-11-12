@@ -16,12 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-$dir = "users"; //directory of users folders
-$adminUL = "emil2"; //admin's username
-$liveURL = "cms.dreamoc.com"; // URL to the webpage, where the files are hosted. Use without http:// + no sub categories. Subdomains are allowed though.
-$AutofindLocation = "on"; //options: on/off
-$defaultLocation = "Europe/Berlin"; // Default location of your Dreamoc
-
 
 include_once 'psl-config.php';   // Needed because functions.php is not included
 
