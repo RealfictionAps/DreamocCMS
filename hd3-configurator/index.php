@@ -5,8 +5,64 @@
 <script src="hd3-configurator/js/function.js"></script>
 
 
+<script type="text/javascript">
+//try to create an object to send our request with
+var request=null;
+
+try
+{
+	request=new XMLHttpRequest();
+}
+catch(e)
+{
+	try
+	{
+		request=new ActiveXObject("Msxml2.XMLHTTP");
+	}
+	catch (e)
+	{
+		try
+		{
+			request=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		catch(e) {}
+	}
+}
+
+function loadImages()
+{
+        //call on our php script if request object was created successfully
+	if(request!==null)
+	{
+		//send our request
+		request.open("GET","geoplugin.class/city.php?foo",false);
+		//set a function to call when we get a response
+		request.onreadystatechange=hideLoader;
+		request.send(null);
+	}
+}
+
+function hideLoader()
+{
+	//if the response is complete, hide our loader
+	if(request.readyState==4)
+		document.getElementById('spinner').style.display='none';
+}
+
+//call loadImage() after the page loads
+window.addEventListener ?
+	window.addEventListener('load',loadImages,false) :
+		window.attachEvent('onload',loadImages);
+</script>
 
 <div align="left" style="padding:30px;">
+
+<div id="spinner" align="center">
+We are loading your current location.<br>
+This can take a while<br>
+<img src="../assets/loading-spinner.gif" width="150" />
+</div>
+
 <form action="hd3-configurator/callweb.php" method="post" name="formdchp" id="formdchp">
 
 <div style="margin-left: -10px; margin-bottom: 10px; color:#606060;">1: Choose Dreamoc Location</div>
@@ -32,7 +88,7 @@ function tz_list() {
   <select name="ntp_timezone" id="ntp_timezone" style="font-family: 'Courier New', Courier, monospace; width: 430px;">
     <option value="0">Please, select timezone</option>
     <?php foreach(tz_list() as $t) { ?>
-      <?php
+	  <?php
     if($AutofindLocation == 'on') {
 		require_once('geoplugin.class/geoplugin.class.php');
 		$geoplugin = new geoPlugin();
@@ -48,14 +104,15 @@ function tz_list() {
 		$place = $defaultLocation;
 	}
 ?>
+      
       <option <?php if("$place" == $t['zone']) { echo "selected"; } ?> value="<?php $val = str_replace("UTC/GMT ", "", $t['diff_from_GMT']); echo $val;  ?>">
         <?php print $t['diff_from_GMT'] . ' - ' . $t['zone'] ?>
       </option>
     <?php } ?>
   </select>
 		 <span title='Choose the timezone of where your Dreamoc is placed physically.' class="masterTooltip">?</span>
-	</div>
-
+         </div>
+         
    <div style="margin-left: -10px; margin-bottom: 10px; margin-top: 40px; color:#606060;">2: Timer setting</div>
    	<div class="block">
 		<label>Update content on power up:</label>
@@ -174,7 +231,7 @@ function tz_list() {
 		<input class="btn_green" style="float:right;" value="Compose key for SD Card" type="submit" name="submit" id="Send">
 	</div>
 </form>
-
+        
 
 <?php if(isset($_GET['mode'])) { ?>
 <script>
@@ -186,7 +243,6 @@ function tz_list() {
 });
 </script>
 <?php } ?>
-
   
         <?php else : ?>
             <p>
