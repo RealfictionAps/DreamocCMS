@@ -22,9 +22,9 @@ DreamocCMS is a content management system, that you can use to manage all your D
 4. Edit "includes/psl-config.php" to match server-settings
 5. Run the setup from “/setup.php”
 6. Login with these informations: 
-+ Username: test_user 
-+ Email: test@example.com 
-+ Password: 6ZaxN2Vzm9NUJT2y
+  * Username: test_user 
+  * Email: test@example.com 
+  * Password: 6ZaxN2Vzm9NUJT2y
 7. Create a new user from the user menu and make the user admin.
 8. Log out and in with the new user
 9. Delete the "test_user" from the user menu
