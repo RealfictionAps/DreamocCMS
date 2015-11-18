@@ -8,8 +8,8 @@ DreamocCMS is a content management system, that you can use to manage all your D
 
 1. Internet connection to all of your Dreamocs
 2. Works only with these models:
-⋅⋅* Dreamoc HD3
-⋅⋅* Dreamoc POP 2+3
+  * Dreamoc HD3
+  * Dreamoc POP 2+3
 3. Internet server that runs Apache, PHP 5+ & MySql
 4. If you need to use FTP-protocol (not standart. you need to use ProFTPd protocol.
 
@@ -22,9 +22,9 @@ DreamocCMS is a content management system, that you can use to manage all your D
 4. Edit "includes/psl-config.php" to match server-settings
 5. Run the setup from “/setup.php”
 6. Login with these informations: 
-⋅⋅* Username: test_user 
-⋅⋅* Email: test@example.com 
-⋅⋅* Password: 6ZaxN2Vzm9NUJT2y
++ Username: test_user 
++ Email: test@example.com 
++ Password: 6ZaxN2Vzm9NUJT2y
 7. Create a new user from the user menu and make the user admin.
 8. Log out and in with the new user
 9. Delete the "test_user" from the user menu
