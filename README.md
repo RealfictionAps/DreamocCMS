@@ -1,10 +1,10 @@
-### DreamocCMS
+# DreamocCMS
 
 DreamocCMS is a content management system, that you can use to manage all your Dreamocs across the world from one place. In the CMS you have options to upload as many files as you want to your cloud. The files are automaticly pusched out to all of your Dreamocs at a specific time a day, that you choose. Now you can run big campaigns on many different location stores and update content in seconds.
 
 ---
 
-### Requirements
+## Requirements
 
 1) Internet connection to all of your Dreamocs
 2) Works only with these models:
@@ -15,7 +15,7 @@ DreamocCMS is a content management system, that you can use to manage all your D
 
 ---
 
-### How to setup
+## How to setup
 1) Upload content of folder to your domain or subdomain.
 2) Set permissions for the folder "users", to "CHMOD 755"
 3) Create a MySql database called "DreamocCMS"
@@ -32,7 +32,7 @@ DreamocCMS is a content management system, that you can use to manage all your D
 
 ---
 
-### Optional settings
+## Optional settings
 
 1) Set a CRON JOB to: http://your-domain.com/path-to-DreamocCMS/cron.php
 2) In ”includes/psl-config.php”, you can set “AutofindLocation” to on or off. This will find the location of the computer for you.
