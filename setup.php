@@ -53,8 +53,13 @@ if(empty($result)) {
 				$result = mysqli_query($dbConnection, $query);
 				
 				
-echo "setup done";
-
+echo "
+<div align='center'>
+<strong>Setup done</strong>
+<br><br>
+<a href='login.php'>Go to login page</a>.
+</div>
+";
 }
 else {
 	echo "setup was already done";
