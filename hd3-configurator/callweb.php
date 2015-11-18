@@ -1,4 +1,6 @@
 <?php 
+include_once '../includes/analytics.php';
+
 include_once '../includes/db_connect.php';
 include_once '../includes/functions.php';
 
@@ -53,28 +55,30 @@ if(isset($_POST['submit'])){
 	   $auto_time =$_POST['auto_time'];
 	 }
 	 
-	 if($_POST['auto_time_value']!=''){
-	   $auto_time_value =$_POST['auto_time_value'];
+	 if($_POST['auto_time_value_hh']!=''){
+	   $auto_time_value_hh =$_POST['auto_time_value_hh'];
+	   $auto_time_value_mm =$_POST['auto_time_value_mm'];
+	   $auto_time_value=$auto_time_value_hh . ":" . $auto_time_value_mm . ":00";
 	 }else{
 	   $auto_time_value='12:30:00';
 	 } 
 	 
-	 if($_POST['protocol_type']!=''){
+	 /*if($_POST['protocol_type']!=''){
 	   $protocol_type = 'ftp';
-	 }else{
-	   $$protocol_type = 'ftp';
-	 }
+	 }else{*/
+	   $protocol_type = 'http';
+	 //}
 	 
 	 if($_POST['protocol_url']!=''){
-	   $protocol_url = 'customercontent.dreamoc.com';
+	   $protocol_url = "$liveURL";
 	 }else{
-	   $protocol_url='customercontent.dreamoc.com';
+	   $protocol_url="$liveURL";
 	 }
-	 if($_POST['protocol_port']!=''){
+	 /*if($_POST['protocol_port']!=''){
 	   $protocol_port = '21';
-	 }else{
-	   $protocol_port='21';
-	 }
+	 }else{*/
+	   $protocol_port='80';
+	 //}
 	 
 	 if($_POST['protocol_id']!=''){
 	   $protocol_id = strtolower($userL);
@@ -87,11 +91,11 @@ if(isset($_POST['submit'])){
 	   $protocol_pw = $serverPass;
 	 }
 	
-	if($_POST['protocol_path']!=''){
+	/*if($_POST['protocol_path']!=''){
 	   $protocol_path ="/";
-	 }else{
-	   $protocol_path="/";
-	 }
+	 }else{*/
+	   $protocol_path="/users/$userL/";
+	 //}
 	 
 	 if($_POST['ntp_options']!=''){
 	   $ntp_options =$_POST['ntp_options'];
@@ -104,29 +108,35 @@ if(isset($_POST['submit'])){
 	   $ntp_ip='204.152.184.72';
 	 } 
 	 
-	 if($_POST['ntp_timezone_adjust']!=''){
-	   $ntp_timezone_adjust =$_POST['ntp_timezone_adjust'];
-	 }else{
-	   $ntp_timezone_adjust='+';
+	 $tz = $_POST['ntp_timezone'];
+	 $tz10 = substr($tz, 0, 1);
+	 if ($_POST['ntp_timezone']) {
+	   $ntp_timezone_adjust = $tz10;
+	 } else {
+	   $ntp_timezone_adjust = '+';
 	 } 
 	 
 	 if($_POST['ntp_timezone']!=''){
-	   $ntp_timezone =$_POST['ntp_timezone'];
+	   $ntp_timezone = substr($tz, 1, 5);
 	 }else{
-	   $ntp_timezone='02:00';
+	   $ntp_timezone='xx:00';
 	 }
 	if($_POST['autopower_options']!=''){
 	   $autopower_options =$_POST['autopower_options'];
 	 }else{
 	   $autopower_options='12:34:00';
 	 }
-	 if($_POST['poweron_time']!=''){
-	   $poweron_time =$_POST['poweron_time'];
+	 if($_POST['poweron_time_hh']!=''){
+	   $poweron_time_hh =$_POST['poweron_time_hh'];
+	   $poweron_time_mm =$_POST['poweron_time_mm'];
+	   $poweron_time =$poweron_time_hh . ":" . $poweron_time_mm . ":00";
 	 }else{
 	   $poweron_time='07:30:00';
 	 }
-	 if($_POST['poweroff_time']!=''){
-	   $poweroff_time =$_POST['poweroff_time'];
+	 if($_POST['poweroff_time_hh']!=''){
+	   $poweroff_time_hh =$_POST['poweroff_time_hh'];
+	   $poweroff_time_mm =$_POST['poweroff_time_mm'];
+	   $poweroff_time =$poweroff_time_hh . ":" . $poweroff_time_mm . ":00";
 	 }else{
 	   $poweroff_time='20:00:00';
 	 }

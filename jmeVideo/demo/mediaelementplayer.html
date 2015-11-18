@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	
+	<script src="../build/jquery.js"></script>	
+	<script src="../build/mediaelement-and-player.min.js"></script>
+	<script src="testforfiles.js"></script>	
+	<link rel="stylesheet" href="../build/mediaelementplayer.min.css" />
+</head>
+<body>
+
+
+<!-- simple single file method -->
+<video width="640" height="360" src="../media/other.mp4" type="video/mp4" 
+	id="player1" poster="../media/echo-hereweare.jpg" 
+	controls="controls" preload="none"></video>
+	
+
+
+
+<script>
+
+$('audio,video').mediaelementplayer({
+	//mode: 'shim',
+	success: function(player, node) {
+		$('#' + node.id + '-mode').html('mode: ' + player.pluginType);
+	}
+});
+
+</script>
+
+
+
+</body>
+</html>

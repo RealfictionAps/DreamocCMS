@@ -15,6 +15,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+//if($_SERVER['SERVER_NAME'] != "http://cms.dreamoc.com") { header('location: http://cms.dreamoc.com/'); }
+include_once 'includes/analytics.php';
+
 include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
 
@@ -43,6 +46,17 @@ if (login_check($mysqli) == true) {
                     <div class="bar title-bar">
                         <h2>Login</h2>
                     </div>
+<?php
+// Include and instantiate the class.
+require_once 'Mobile_Detect.php';
+$detect = new Mobile_Detect;
+ 
+// Any mobile device (phones or tablets).
+if ( $detect->isMobile() ) {
+echo '<div align="center" style="font-size: 60px; margin-top: 0px;">You cannot use the DreamocCMS on a mobile device.</div>';
+}
+else {
+?>
 <div style="margin: 20px 20px 20px 20px;">
           <form action="includes/process_login.php" method="post" name="login_form">
           <table width="0" height="100" border="0" cellspacing="0" cellpadding="0">
@@ -59,7 +73,7 @@ if (login_check($mysqli) == true) {
 </table>
           <div style="clear:both;"></div>
             <div align="center">
-            	<input type="submit" value="Login" class="btn" onclick="formhash(this.form, this.form.password);" /> 
+            	<input type="submit" value="Login" class="btn_green" onclick="formhash(this.form, this.form.password);" /> 
             </div>
           </form>
         
@@ -74,5 +88,7 @@ if (login_check($mysqli) == true) {
     </tr>
   </tbody>
 </table>
+<?php } ?>
+
     </body>
 </html>

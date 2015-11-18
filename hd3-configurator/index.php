@@ -5,31 +5,120 @@
 <script src="hd3-configurator/js/function.js"></script>
 
 
+<script type="text/javascript">
+//try to create an object to send our request with
+var request=null;
+
+try
+{
+	request=new XMLHttpRequest();
+}
+catch(e)
+{
+	try
+	{
+		request=new ActiveXObject("Msxml2.XMLHTTP");
+	}
+	catch (e)
+	{
+		try
+		{
+			request=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		catch(e) {}
+	}
+}
+
+function loadImages()
+{
+        //call on our php script if request object was created successfully
+	if(request!==null)
+	{
+		//send our request
+		request.open("GET","geoplugin.class/city.php?foo",false);
+		//set a function to call when we get a response
+		request.onreadystatechange=hideLoader;
+		request.send(null);
+	}
+}
+
+function hideLoader()
+{
+	//if the response is complete, hide our loader
+	if(request.readyState==4)
+		document.getElementById('spinner').style.display='none';
+}
+
+//call loadImage() after the page loads
+window.addEventListener ?
+	window.addEventListener('load',loadImages,false) :
+		window.attachEvent('onload',loadImages);
+</script>
 
 <div align="left" style="padding:30px;">
+
+<div id="spinner" align="center">
+We are loading your current location.<br>
+This can take a while<br>
+<img src="../assets/loading-spinner.gif" width="150" />
+</div>
+
 <form action="hd3-configurator/callweb.php" method="post" name="formdchp" id="formdchp">
 
-<div style="font-size: 18px; margin-left: -10px; margin-bottom: 10px; color:#606060;">1: Choose Dreamoc Location</div>
-	<div class="block">
-		<label>NTP Timezone Adjust  </label>
-		<input name="ntp_timezone_adjust" size="30" type="radio" checked ="checked"  value="+" >+
-		<input name="ntp_timezone_adjust" size="30" type="radio" value="-"  id="dhcp_set">-
-		<input name="ntp_timezone_adjust" size="30" type="radio" value="0"  id="dhcp_set">0
-		 <span title='ntp_timezone_adjust : 1. "+" It will plus timezone into current time that get from ntp. 2. "-" It will minus timezone into current time that get from ntp. 3. "0" It will keep current time that get from ntp.' class="masterTooltip">? </span>
-	</div>
+<div style="margin-left: -10px; margin-bottom: 10px; color:#606060;">1: Choose Dreamoc Location</div>
+<?php
+/**
+ * Timezones list with GMT offset
+ *
+ * @return array
+ * @link http://stackoverflow.com/a/9328760
+ */
+function tz_list() {
+  $zones_array = array();
+  $timestamp = time();
+  foreach(timezone_identifiers_list() as $key => $zone) {
+    date_default_timezone_set($zone);
+    $zones_array[$key]['zone'] = $zone;
+    $zones_array[$key]['diff_from_GMT'] = 'UTC/GMT ' . date('P', $timestamp);
+  }
+  return $zones_array;
+}
+?>	
+	<div class="block">        
+  <select name="ntp_timezone" id="ntp_timezone" style="font-family: 'Courier New', Courier, monospace; width: 430px;">
+    <option value="0">Please, select timezone</option>
+    <?php foreach(tz_list() as $t) { ?>
+	  <?php
+    if($AutofindLocation == 'on') {
+		require_once('geoplugin.class/geoplugin.class.php');
+		$geoplugin = new geoPlugin();
+		$geoplugin->locate();
 	
-	<div class="block">
-		<label>NTP Timezone</label>
-		<input name="ntp_timezone" id="ntp_timezone" size="30" type="text" value="02:00">
-		 <span title='ntp_timezone : timezone value, the range is from 00:00 to 13:00 (hh:mm)' class="masterTooltip">?</span>
-	</div>
-
-   <div style="font-size: 18px; margin-left: -10px; margin-bottom: 10px; margin-top: 40px; color:#606060;">2: Timer setting</div>
+		$continent_short = "{$geoplugin->continentCode}";
+		$healthy = array("EU", "AU", "US");
+		$yummy   = array("Europe", "Australia", "America");
+		$continent = str_replace($healthy, $yummy, $continent_short);
+		$place = "$continent/{$geoplugin->city}";
+	}
+	if($AutofindLocation == 'off' || 0 === strpos($place, '/')) {
+		$place = $defaultLocation;
+	}
+?>
+      
+      <option <?php if("$place" == $t['zone']) { echo "selected"; } ?> value="<?php $val = str_replace("UTC/GMT ", "", $t['diff_from_GMT']); echo $val;  ?>">
+        <?php print $t['diff_from_GMT'] . ' - ' . $t['zone'] ?>
+      </option>
+    <?php } ?>
+  </select>
+		 <span title='Choose the timezone of where your Dreamoc is placed physically.' class="masterTooltip">?</span>
+         </div>
+         
+   <div style="margin-left: -10px; margin-bottom: 10px; margin-top: 40px; color:#606060;">2: Timer setting</div>
    	<div class="block">
 		<label>Update content on power up:</label>
-		<input name="auto_boot" size="30" type="radio"  checked="checked" value="on" ><span>On</span>
-		<input name="auto_boot" size="30" type="radio" value="off"  id="dhcp_set"><span>Off</span>
-		<span title='auto_boot_options : 1."on" when system boot, it will start to download 2."off" when system boot, it will not start to download ' class="masterTooltip">?</span>
+		<input name="auto_boot" size="30" type="radio"  checked="checked" value="on" ><span>ON</span>
+		<input name="auto_boot" size="30" type="radio" value="off"  id="dhcp_set"><span>OFF</span>
+		<span title='Auto Boot lets you decide if the content should be updated when you turn on your Dreamoc (ON), or if it should only update content on a specific time (OFF).' class="masterTooltip">?</span>
 	</div>
 
 <br>
@@ -43,8 +132,23 @@
 	<div class="block">
 		<input type="hidden" name="auto_time" value="on">
         <label>Daily content update time:</label>
-		<input name="auto_time_value" class="" id="auto_time_value1" size="30" value="12:30:00" type="text"> 
-		<span title='auto_time_value : For schedule download time setting, the time range is from 00:00:00 to 23:59:59(hh:mm:ss)' class="masterTooltip">?</span>
+		hh: <select name="auto_time_value_hh">
+        <?php
+			for ($i = 0; $i <= 23; $i++) {
+    		if($i < 10) { $i = "0" . $i; }
+			echo "<option value='$i'>$i</option>";
+			}
+			?>
+        </select> 
+        mm: <select name="auto_time_value_mm">
+        <?php
+			for ($i = 0; $i <= 59; $i++) {
+    		if($i < 10) { $i = "0" . $i; }
+			echo "<option value='$i'>$i</option>";
+			}
+			?>
+        </select> 
+		<span title='The one time a day, where your dreamoc seeks if there should be new content on the server - and then download it. Range can be set from 00:00:00 to 23:59:59 (hh:mm:ss).' class="masterTooltip">?</span>
 	</div>	
 	
 	
@@ -58,28 +162,76 @@
 <br>
 	<div class="block">
 		<label>Daily Dreamoc power schedule:</label>
-		<input name="autopower_options" id="autopower_options1" size="30"  type="radio"  value="on" ><span>ON</span>
-		<input name="autopower_options" size="30" id="autopower_options2" checked ="checked" type="radio" value="off"  id="dhcp_set"><span>OFF</span>
-		 <span title='autopower_options : 1. "on" System will be auto power on/off when power on/off time is up 2. "off" Disable the feature' class="masterTooltip">?  </span>
+		<script type="text/javascript">
+      function enable()
+      {
+		 $("#poweron_time1").removeAttr('disabled');
+		 $("#poweron_time2").removeAttr('disabled');
+		 $("#poweroff_time1").removeAttr('disabled');
+		 $("#poweroff_time2").removeAttr('disabled'); //removes the disabled attribut from the  
+                                                //element whose id is 'date_end'
+      }
+	  function disable()
+      {
+         $("#poweron_time1").attr('disabled', 'false');
+		 $("#poweron_time2").attr('disabled', 'false');
+		 $("#poweroff_time1").attr('disabled', 'false');
+		 $("#poweroff_time2").attr('disabled', 'false');
+      }
+	</script>
+        <input onClick="enable()" name="autopower_options" id="autopower_options1" size="30"  type="radio"  value="on" ><span>ON</span>
+		<input onClick="disable()" name="autopower_options" size="30" id="autopower_options2" checked ="checked" type="radio" value="off" id="dhcp_set"><span>OFF</span>
+		 <span title="Should be switched to ON if you want your Dreamoc to automatically power on and off at a specific time a day. It it's OFF, the feature is disabled." class="masterTooltip">?  </span>
 	
 	</div>
 	
 	<div class="block">
 		<label>Dreamoc power on time:</label>
-		<input name="poweron_time" id="poweron_time" size="30" value="07:30:00" type="text"> 
-		<span title='poweron_time : The time range is from 00:00:00 to 23:59:59 (hh:mm:ss)' class="masterTooltip">?</span>
+        hh: <select name="poweron_time_hh" id="poweron_time1" disabled>
+        <?php
+			for ($i = 0; $i <= 23; $i++) {
+    		if($i < 10) { $i = "0" . $i; }
+			echo "<option value='$i'>$i</option>";
+			}
+			?>
+        </select> 
+        mm: <select name="poweron_time_mm" id="poweron_time2" disabled>
+        <?php
+			for ($i = 0; $i <= 59; $i++) {
+    		if($i < 10) { $i = "0" . $i; }
+			echo "<option value='$i'>$i</option>";
+			}
+			?>
+        </select> 
+		<span title='The specific time a day, where the Dreamoc should power ON. Range can be set from 00:00:00 to 23:59:59 (hh:mm:ss).' class="masterTooltip">?</span>
 	</div>	
 	<div class="block">
 		<label>Dreamoc power off time:</label>
-		<input name="poweroff_time" id="poweroff_time" size="30" value="20:00:00" type="text"> 
-		<span title='poweroff_time : The time range is from 00:00:00 to 23:59:59 (hh:mm:ss)' class="masterTooltip">?</span>
+         hh: <select name="poweroff_time_hh" id="poweroff_time1" disabled>
+        <?php
+			for ($i = 0; $i <= 23; $i++) {
+    		if($i < 10) { $i = "0" . $i; }
+			echo "<option value='$i'>$i</option>";
+			}
+			?>
+        </select> 
+        mm: <select name="poweroff_time_mm" id="poweroff_time2" disabled>
+        <?php
+			for ($i = 0; $i <= 59; $i++) {
+    		if($i < 10) { $i = "0" . $i; }
+			echo "<option value='$i'>$i</option>";
+			}
+			?>
+        </select> 
+		<span title='The specific time a day, where the Dreamoc should power OFF. Range can be set from 00:00:00 to 23:59:59 (hh:mm:ss).' class="masterTooltip">?</span>
 	</div>
 	
 	
-	<div class="block" style="width:300px;margin-bottom:70px">
-		<input class="btn" style="float:right;" value="Compose for SD Card" type="submit" name="submit" id="Send">
+	<div class="block" style="width:300px; margin-bottom:70px;">
+		<input class="btn_green" style="float:right;" value="Compose key for SD Card" type="submit" name="submit" id="Send">
 	</div>
 </form>
+        
 
 <?php if(isset($_GET['mode'])) { ?>
 <script>
@@ -91,10 +243,7 @@
 });
 </script>
 <?php } ?>
-
-
-
-</div>	  
+  
         <?php else : ?>
             <p>
                 <span class="error">You are not authorized to access this page.</span> Please <a href="login.php">login</a>.

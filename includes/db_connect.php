@@ -16,7 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-$dir = "users"; //directory of users folders
 
 include_once 'psl-config.php';   // Needed because functions.php is not included
 

@@ -1,6 +1,0 @@
-Header merge Cache-Control no-cache
-Header merge Cache-Control no-store
-
-#Surftown was here 
-AddType application/x-httpd-php56  php
-

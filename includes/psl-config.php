@@ -25,13 +25,18 @@
  * also go here...
  */
 
+$dir = "users"; //directory of users folders
+$liveURL = "cms.dreamoc.com"; // URL to the webpage, where the files are hosted. Use without http:// + no sub categories. Subdomains are allowed though.
+$AutofindLocation = "off"; //options: on/off
+$defaultLocation = "Europe/Berlin"; // Default location of your Dreamoc
+
 /**
  * These are the database login details
  */
 define("HOST", "localhost"); 		// The host you want to connect to. 
 define("USER", "root"); 					// The database username. 
 define("PASSWORD", "root"); 				// The database password. 
-define("DATABASE", "secure_login");     // The database name.
+define("DATABASE", "DreamocCMS1");     // The database name.
 
 /**
  * Who can register and what the default role will be
