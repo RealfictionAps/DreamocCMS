@@ -8,8 +8,8 @@ DreamocCMS is a content management system, that you can use to manage all your D
 
 1. Internet connection to all of your Dreamocs
 2. Works only with these models:
-*   Dreamoc HD3
-*   Dreamoc POP 2+3
+*	Dreamoc HD3
+*	Dreamoc POP 2+3
 3. Internet server that runs Apache, PHP 5+ & MySql
 4. If you need to use FTP-protocol (not standart. you need to use ProFTPd protocol.
 
