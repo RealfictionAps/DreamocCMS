@@ -11,7 +11,7 @@ DreamocCMS is a content management system, that you can use to manage all your D
   * Dreamoc HD3
   * Dreamoc POP 2+3
 3. Internet server that runs Apache, PHP 5+ & MySql
-4. If you need to use FTP-protocol (not standart. you need to use ProFTPd protocol.
+4. If you need to use FTP-protocol (not standart - change in "hd3-configurator/callweb.php"), you need to use ProFTPd protocol.
 
 ---
 
