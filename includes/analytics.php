@@ -1,1 +1,1 @@
-// Your Google Analytics code here
+<!-- Your Google Analytics code here -->
