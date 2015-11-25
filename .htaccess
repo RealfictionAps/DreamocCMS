@@ -1,0 +1,18 @@
+Header merge Cache-Control no-cache
+Header merge Cache-Control no-store
+
+#Surftown was here 
+AddType application/x-httpd-php56  php
+
+## Disable Cache
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule (.*) - [L,E=Cache-Control:no-cache] 
+</IfModule>
+
+php_value upload_max_filesize 256M
+php_value post_max_size 256M
+
+AddType video/ogg .ogv
+AddType video/mp4 .mp4
+AddType video/webm .webm
