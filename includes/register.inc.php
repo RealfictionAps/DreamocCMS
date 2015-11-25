@@ -82,6 +82,7 @@ if (isset($_POST['username'], $_POST['email'], $_POST['serverpass'], $_POST['p']
                 exit();
             }
         }
+		mkdir("$dir/$username", 0755);
         //header('Location: ../index.php?p=register&success=1');
         echo '<meta http-equiv="refresh" content="0; url=index.php?p=register&success=1">';
 		exit();

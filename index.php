@@ -1,3 +1,4 @@
+<?php @ob_start(); ?>
 <?php
 include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
@@ -105,19 +106,29 @@ $(document).ready(function(){
     }
 })
 </script>
+<?php // Findes descriptionfile?
+$fileDesc = "$dir/$userL/description.txt";
+if (file_exists($fileDesc)) {
+	$descIn = file_get_contents($fileDesc);
+} 
+else {
+	$descIn = "My Dreamocs";
+}
+?>
+
 <div style="float:right;  padding-top: 0px; margin-right: 20px;">
 <?php if(isset($_GET['upd'])) { ?>
 <div style=" position:absolute; border: solid 1px #fff; border-radius: 10px; margin-left: -400px; margin-top: -10px; padding: 3px;">
 <form method="post" action="#" name="desc1" id="desc1">
 <label>Name your Group:</label>
-<input style="width: 210px;" name="desc" type="text" autofocus placeholder="My Dreamoc" value="<?php $descIn = file_get_contents("$dir/$userL/description.txt"); echo strip_tags($descIn); ?>">
+<input style="width: 210px;" name="desc" type="text" autofocus placeholder="My Dreamoc" value="<?php echo strip_tags($descIn); ?>">
 <input type="hidden" name="p" value="<?php echo $_GET['p']; ?>">
 <input class="btn_green" type="submit" value="Ok">
 </form>
 </div>
 <?php } else { ?>
 Name your Group:
-<a class="btn_blue" href="?p=<?php echo $_GET['p']; ?>&upd=1"><?php $descIn = file_get_contents("$dir/$userL/description.txt"); if($descIn != '') { echo strip_tags($descIn); } else { echo "My Dreamoc"; } ?></a>
+<a class="btn_blue" href="?p=<?php echo $_GET['p']; ?>&upd=1"><?php echo strip_tags($descIn); ?></a>
 <?php } 
 if(isset($_POST['desc'])) {
 	$desc = $_POST['desc'];

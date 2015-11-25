@@ -1,5 +1,4 @@
 <?php
-
 /*
  * Copyright (C) 2013 peredur.net
  *
@@ -16,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
+ 
 include_once 'psl-config.php';
 
 function sec_session_start() {
@@ -39,7 +38,7 @@ function sec_session_start() {
     // Sets the session name to the one set above.
     session_name($session_name);
 
-    session_start();            // Start the PHP session 
+	session_start();            // Start the PHP session 
     session_regenerate_id();    // regenerated the session, delete the old one. 
 }
 

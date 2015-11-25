@@ -1,4 +1,8 @@
 <?php
+@ob_start();
+session_start();
+?>
+<?php
 /**
  * Copyright (C) 2013 peredur.net
  *
