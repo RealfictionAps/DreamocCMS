@@ -44,7 +44,7 @@ if (ftp_get($conn_id, $local_file, $server_file, FTP_BINARY)) {
 	echo "ftp";
 }
 else {
-    echo "There was a problem\n";
+    echo "WA_problem\n";
 }
 // close the connection
 ftp_close($conn_id);
