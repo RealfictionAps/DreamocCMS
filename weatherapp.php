@@ -1,10 +1,10 @@
-<?php 
+<?php
 include_once 'includes/db_connect.php';
 include_once 'includes/functions.php';
 
 sec_session_start();
 
-if (login_check($mysqli) == true) : 
+if (login_check($mysqli) == true) :
 $userL = htmlentities($_SESSION['username']);
 ?>
 <div align="center" style="width: 500px;">
@@ -62,7 +62,7 @@ $user_id1 = "{$row['id']}"; // User ID fra members
 	$WaSet = "{$row2['weatherapp']}";
 	$DBusername = "{$row2['username']}";
 	$DBpassword = "{$row2['password']}";
-	$DBfilename = "{$row2['filename']}"; 
+	$DBfilename = "{$row2['filename']}";
 	}
 ?>
 <?php
@@ -79,6 +79,7 @@ $local_file = "users/$userL/$rand$filename";
 $conn_id = ftp_connect($ftp_server);
 // login with username and password
 $login_result = ftp_login($conn_id, $username, $password);
+ftp_pasv($conn_id, true);
 // try to download $server_file and save to $local_file
 
 if($POST_toggleWA == 'on') {
@@ -88,7 +89,7 @@ if (ftp_get($conn_id, $local_file, $filename, FTP_BINARY)) {
 	$msg = "msg1"; // OK + ON
 }
 else {
-    $toggleWA = "off";
+    $toggleWA = "off"; // Wrong
 	$msg .= "msg2"; // Wrong
 }
 }
@@ -104,14 +105,14 @@ else {
 }
 // close the connection
 ftp_close($conn_id);
-		
-		
+
+
 if($user_id == '') {
-	mysql_query("INSERT INTO user_meta (user_id, weatherapp, filename, username, password) VALUES('$user_id1', '$toggleWA', '$filename', '$username', '$password' ) ") 
+	mysql_query("INSERT INTO user_meta (user_id, weatherapp, filename, username, password) VALUES('$user_id1', '$toggleWA', '$filename', '$username', '$password' ) ")
 	or die(mysql_error());
 	}
 else {
-	mysql_query("UPDATE user_meta SET weatherapp = '$toggleWA', filename = '$filename', username = '$username', password = '$password' WHERE user_id = '$user_id1' ") 
+	mysql_query("UPDATE user_meta SET weatherapp = '$toggleWA', filename = '$filename', username = '$username', password = '$password' WHERE user_id = '$user_id1' ")
 	or die(mysql_error());
 }
 		echo '<meta http-equiv="refresh" content="0; url=index.php?p=weatherapp&updated=1&msg=' . $msg . '">';
@@ -128,7 +129,7 @@ else {
 <form id="weatherapp" name="weatherapp" method="post" action="index.php?p=weatherapp">
 
               Enable WeatherApp&nbsp;&nbsp;&nbsp;<span title2="This enables / disables Weather App from Scenespire to run on your Dreamocs together with your other content." id="tooltip" class="tooltip">?</span><br><br>
-              
+
               <input type="checkbox" class="slider-v3" id="toggleWA" name="toggleWA" <?php if($WaSet == 'on') { echo 'checked'; } ?> />
               <label for="toggleWA"></label>
               <div style=" margin-left: 155px; margin-top: -27px; position:absolute; color:#9E9E9E;">OFF</div>
@@ -156,7 +157,7 @@ else {
       <input name="conf" type="submit" class="btn_green" value="Update">
       <?php if(isset($_GET['updated'])) { ?>
     </p>
-    
+
     <div align='center' style="color:green; padding-top: 10px; font-weight: bold;">
     <?php
 	if($_GET['msg'] == 'msg1') {

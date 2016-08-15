@@ -16,7 +16,7 @@ $user_id = "{$row['id']}";
 
 $result2 = mysql_query("SELECT * FROM user_meta WHERE user_id = $user_id");
 while($row2 = mysql_fetch_array($result2, MYSQL_ASSOC))
-{ 
+{
 $username = "{$row2['username']}";
 $password = "{$row2['password']}";
 $filename = "{$row2['filename']}";
@@ -36,6 +36,7 @@ $conn_id = ftp_connect($ftp_server);
 
 // login with username and password
 $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+ftp_pasv($conn_id, true);
 
 // try to download $server_file and save to $local_file
 if (ftp_get($conn_id, $local_file, $server_file, FTP_BINARY)) {
@@ -77,7 +78,7 @@ while (($file1 = readdir($handle1)) !== false){
 if (!in_array($file1, array('.', '..', 'server_check.xml', 'server_control_dreamoc_config.xml', '.htaccess', 'description.txt', '.DS_Store', $filename, $nfs)) && !is_dir($dir.$file1)) { $i2++; }
 }
     }
-	
+
 $fi = new FilesystemIterator($dir, FilesystemIterator::SKIP_DOTS); // Tæller hvor mange filer (synlige) der er i folderen
 $filesC = iterator_count($fi)-$i2; // Files in folder other than content
 //$i2:  files in folder only content
@@ -123,7 +124,7 @@ foreach($files_list as $file_list){
 
 <?php
 if($count < 1) { // DELETE content / start fresh
-	$fil = fopen("$dir/server_check.xml", "w"); //Åben tekstfilen 
+	$fil = fopen("$dir/server_check.xml", "w"); //Åben tekstfilen
 	fwrite($fil, '');
 	fclose($fil); //Luk filen
 }
@@ -134,7 +135,7 @@ if($count > 1) {
 else { $origFile = ""; }
 
 $contentNew = "
-	<file_number>$count</file_number>	
+	<file_number>$count</file_number>
 	<file>
 	<file_index>$count</file_index>
 	<file_name>$file_list</file_name>
@@ -142,15 +143,15 @@ $contentNew = "
 	</file>
 ";
 
-if($file_list === end($files_list)) { 
+if($file_list === end($files_list)) {
 //if($count == $i2) {
 	$header = "<?xml version='1.0' encoding='utf-8' ?>\n<file_status>";
-	$footer = "</file_status>"; 
-	} 
+	$footer = "</file_status>";
+	}
 	else
 	{
 	$header = "";
-	$footer = ""; 
+	$footer = "";
 	}  // Hvis det er sidste loop, så skal den skrive headeren i linje 1
 $content = "$header $origFile $contentNew $footer";
 
